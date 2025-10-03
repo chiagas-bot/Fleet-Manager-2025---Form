@@ -115,7 +115,206 @@
       </div>
 
       <!-- Destinatario fisso -->
-      <input type="hidden" id="cta_email" name="cta_email" value="chiara.gas@gmail.com">
+      <input type="hidden" id="cta_email" name="cta_email" value="<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleet Manager Academy - Bologna 2025</title>
+  <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
+  <style>
+    :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    .wrap{max-width:860px;margin:30px auto;padding:20px}
+
+    /* HERO */
+    header.hero{text-align:center;margin-bottom:16px}
+    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
+    .title-left{max-width:860px;margin:0 auto;text-align:left}
+    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
+    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
+    @media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
+
+    /* FORM */
+    form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
+    label{font-weight:600;margin-bottom:6px;display:block}
+    .req{color:var(--brand)}
+    input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:15px}
+    textarea{min-height:100px;resize:vertical}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+
+    fieldset{border:0;margin:0;padding:0}
+    fieldset legend{font-weight:600;margin-bottom:6px}
+    .reason-list{display:grid;gap:8px}
+    .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
+    .reason-list input[type="checkbox"]{width:16px;height:16px}
+
+    .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
+    .consent .row{display:flex;align-items:center;gap:10px}
+    .consent .row strong{font-weight:700}
+    .consent .hint{font-size:12px;color:var(--muted);text-align:left}
+
+    button{background:var(--brand);color:#fff;border:none;padding:12px 24px;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer}
+    button:disabled{opacity:.5;cursor:not-allowed}
+    .success{color:#065f46}
+    .error{color:#7f1d1d}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <img class="logo" src="logo.png" alt="Santander Renting Logo">
+      <div class="title-left">
+        <div class="title-row">
+          <h1 class="page-title">Fleet Manager Academy</h1>
+          <span class="subtitle">Bologna 2025</span>
+        </div>
+        <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
+      </div>
+    </header>
+
+    <form id="fieraForm" autocomplete="off" novalidate>
+      <div>
+        <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
+        <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ABC S.p.A.">
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="referente_nome">Referente | Nome e Cognome <span class="req">*</span></label>
+          <input id="referente_nome" name="contact_name" type="text" required placeholder="Nome e Cognome">
+        </div>
+        <div>
+          <label for="email">E‑mail <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="nome@azienda.it" inputmode="email">
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="cell">Cellulare <span class="req">*</span></label>
+          <input id="cell" name="tel" type="tel" required placeholder="+39 …" inputmode="tel">
+        </div>
+        <div>
+          <label for="dimensione_flotta">Dimensione Flotta <span class="req">*</span></label>
+          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli" inputmode="numeric">
+        </div>
+      </div>
+
+      <div>
+        <fieldset id="motivo-fieldset">
+          <legend>Motivo di interessamento <span class="req">*</span></legend>
+          <div class="reason-list">
+            <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+          </div>
+          <small>Seleziona almeno una voce.</small>
+        </fieldset>
+      </div>
+
+      <div>
+        <label for="regione">Regione (Sede) <span class="req">*</span></label>
+        <select id="regione" name="region" required>
+          <option value="" disabled selected>Seleziona…</option>
+          <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
+          <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
+          <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
+          <option>Marche</option><option>Molise</option><option>Piemonte</option>
+          <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
+          <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
+          <option>Valle d'Aosta</option><option>Veneto</option>
+        </select>
+      </div>
+
+      <!-- Destinatario fisso -->
+      <input type="hidden" id="cta_email" name="cta_email" value="chiara.gas@santanderconsumerrenting.it">
+
+      <div>
+        <label for="note">Info Aggiuntive</label>
+        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
+      </div>
+
+      <div class="consent">
+        <div class="row">
+          <input type="checkbox" id="consenso" required>
+          <label for="consenso"><strong>Dichiaro di aver letto l’Informativa Privacy <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento</strong></label>
+        </div>
+        <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
+      </div>
+
+      <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
+      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <script>
+    // ====== CONFIGURA QUI IL WEBHOOK (Make/Zapier) ======
+    const WEBHOOK_URL = "https://hook.make.com/INCOLLA_QUI_IL_TUO_WEBHOOK";
+
+    const form = document.getElementById('fieraForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const consent = document.getElementById('consenso');
+    const feedback = document.getElementById('feedback');
+    const reasonBoxes = document.querySelectorAll('input[name="interest_reason[]"]');
+
+    function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
+    consent.addEventListener('change', toggleSubmit); toggleSubmit();
+
+    function validateReasons(){
+      const any = Array.from(reasonBoxes).some(b => b.checked);
+      reasonBoxes.forEach(b => b.required = !any);
+      return any;
+    }
+    reasonBoxes.forEach(b => b.addEventListener('change', validateReasons)); validateReasons();
+
+    function serializeForm(){
+      const fd = new FormData(form);
+      const obj = Object.fromEntries(fd.entries());
+      obj.interest_reason = fd.getAll('interest_reason[]');
+      return obj;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      feedback.textContent = '';
+
+      if (!form.checkValidity() || !validateReasons()){
+        feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
+        feedback.className = 'error';
+        return;
+      }
+
+      const data = serializeForm();
+
+      try{
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok){
+          // Mostra messaggio inline OPPURE fai redirect alla pagina Grazie
+          // window.location.href = "grazie.html";
+          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+          feedback.className = 'success';
+          form.reset(); toggleSubmit(); validateReasons();
+        } else {
+          throw new Error('HTTP ' + res.status);
+        }
+      } catch(err){
+        feedback.textContent = 'Invio non riuscito. Verifica URL del webhook o connessione.';
+        feedback.className = 'error';
+      }
+    });
+  </script>
+</body>
+</html>
+">
 
       <div>
         <label for="note">Info Aggiuntive</label>
