@@ -14,14 +14,18 @@
     body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
 
-      /* HERO */
-    header.hero{text-align:center;margin-bottom:12px}
-    header.hero img.logo{height:60px;display:block;margin:0 auto 12px auto}
-    .title-left{text-align:left;margin:0 auto;max-width:760px}
-    .title-left h1{font-size:20px;font-weight:700;color:var(--accent);margin:0}
-    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
-    .title-right .footnote{font-size:10px;color:#8a8f98;text-align:left;margin-top:2px}
-
+    /* HERO */
+    header.hero{text-align:center;margin-bottom:16px}
+    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
+    .title-left{max-width:860px;margin:0 auto;text-align:left}
+    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
+    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
+    @media (max-width:520px){
+      .title-row{flex-wrap:wrap}
+      .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal}
+    }
 
     /* FORM */
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
@@ -50,6 +54,18 @@
     .success{color:#065f46}
     .error{color:#7f1d1d}
   </style>
+
+  <!-- EmailJS: invio email dal front‑end -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // INSERISCI LE TUE CREDENZIALI EMAILJS
+    const EMAILJS_PUBLIC_KEY = "SOSTITUISCI_CON_LA_TUA_PUBLIC_KEY";
+    const EMAILJS_SERVICE_ID = "SOSTITUISCI_CON_IL_TUO_SERVICE_ID";
+    const EMAILJS_TEMPLATE_ID = "SOSTITUISCI_CON_IL_TUO_TEMPLATE_ID";
+    document.addEventListener("DOMContentLoaded", () => {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    });
+  </script>
 </head>
 <body>
   <div class="wrap">
@@ -118,6 +134,9 @@
         </select>
       </div>
 
+      <!-- email CTA dinamica (compilata automaticamente da mappa Regione->email) -->
+      <input type="hidden" id="cta_email" name="cta_email">
+
       <div>
         <label for="note">Info Aggiuntive</label>
         <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
@@ -137,15 +156,27 @@
   </div>
 
   <script>
-    // === CONFIGURAZIONE INVIO ===
-    // Se attivi FormSubmit, inserisci qui l'email VERIFICATA; altrimenti lascia stringa vuota.
-    const FORMSUBMIT_EMAIL = ""; // es. "tuoindirizzo@gmail.com"
-
+    // ====== LOGICA INVIO ======
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
     const consent = document.getElementById('consenso');
     const feedback = document.getElementById('feedback');
     const reasonBoxes = document.querySelectorAll('input[name="interest_reason[]"]');
+    const regione = document.getElementById('regione');
+    const ctaEmail = document.getElementById('cta_email');
+
+    // Mappa Regione -> email di destinazione (CTA). MODIFICA QUI GLI INDIRIZZI.
+    const route = {
+      "Piemonte": "piemonte@santanderconsumerrenting.it",
+      "Lombardia": "lombardia@santanderconsumerrenting.it",
+      "Umbria": "umbria@santanderconsumerrenting.it",
+      "Lazio": "lazio@santanderconsumerrenting.it",
+      "Emilia-Romagna": "emilia@santanderconsumerrenting.it"
+      // ...completa la mappa
+    };
+    // aggiorna l'email CTA quando cambia la regione
+    function updateCTA(){ ctaEmail.value = route[regione.value] || "info@santanderconsumerrenting.it"; }
+    regione.addEventListener('change', updateCTA); updateCTA();
 
     // Abilita bottone solo con consenso
     function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
@@ -159,6 +190,7 @@
     }
     reasonBoxes.forEach(b => b.addEventListener('change', validateReasons)); validateReasons();
 
+    // Serializza
     function serializeForm(){
       const fd = new FormData(form);
       const obj = Object.fromEntries(fd.entries());
@@ -166,6 +198,29 @@
       return obj;
     }
 
+    // Invio con EmailJS
+    async function sendWithEmailJS(data){
+      try{
+        const params = {
+          // campo del template EmailJS: deve prevedere questi parametri
+          to_email: data.cta_email,                // destinatario dinamico
+          organization: data.organization,
+          contact_name: data.contact_name,
+          email: data.email,
+          tel: data.tel,
+          fleet_size: data.fleet_size,
+          region: data.region,
+          interest_reason: (data.interest_reason||[]).join(", "),
+          notes: data.notes || ""
+        };
+        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+        return res.status === 200;
+      }catch(e){
+        return false;
+      }
+    }
+
+    // Fallback mailto
     function buildMailto(data){
       const lines = [
         'Ragione Sociale: ' + (data.organization||''),
@@ -179,31 +234,8 @@
       ];
       const subject = 'Lead FMA Bologna 2025';
       const body = encodeURIComponent(lines.join('\n'));
-      const to = FORMSUBMIT_EMAIL || 'marco.bandinu@santanderconsumerrenting.it';
+      const to = data.cta_email || 'info@santanderconsumerrenting.it';
       return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
-    }
-
-    function downloadBackup(data){
-      const txt = Object.entries(data).map(([k,v]) => k + ': ' + (Array.isArray(v)? v.join(', '): v)).join('\n');
-      const blob = new Blob([txt], {type:'text/plain'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'lead_fma_bologna_2025.txt';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    async function tryFormSubmit(data){
-      if(!FORMSUBMIT_EMAIL) return false;
-      try{
-        const res = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify({...data, _subject:'Lead FMA Bologna 2025', _template:'table'})
-        });
-        return res.ok;
-      }catch(e){ return false; }
     }
 
     form.addEventListener('submit', async (e) => {
@@ -218,26 +250,25 @@
 
       const data = serializeForm();
 
-      // 1) Prova FormSubmit se configurato e verificato
-      let ok = await tryFormSubmit(data);
+      // 1) tenta invio automatico via EmailJS (verso l'email CTA dinamica)
+      let ok = await sendWithEmailJS(data);
 
       if (ok){
-        feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+        feedback.textContent = 'Grazie! La richiesta è stata inviata automaticamente.';
         feedback.className = 'success';
-        form.reset(); toggleSubmit(); validateReasons();
+        form.reset(); toggleSubmit(); validateReasons(); updateCTA();
         return;
       }
 
-      // 2) Fallback sicuro: MAILTO + backup .txt
-      const m = buildMailto(data);
-      downloadBackup(data);
-      window.location.href = m;
-      feedback.textContent = 'Apertura del client email per l’invio... (è stato scaricato anche un file .txt di backup)';
+      // 2) fallback mailto (apre client di posta con destinatario CTA)
+      window.location.href = buildMailto(data);
+      feedback.textContent = 'Apertura del client email per l’invio (fallback).';
       feedback.className = 'success';
     });
   </script>
 </body>
 </html>
+
 
 
 
