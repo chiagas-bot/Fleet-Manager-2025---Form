@@ -1,25 +1,23 @@
+→ invio email automatico al destinatario CTA ===
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy - Bologna 2025</title>
-  <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
   <style>
     :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
-
-        /* HERO */
-    header.hero{text-align:center;margin-bottom:12px}
-    header.hero img.logo{height:60px;display:block;margin:0 auto 12px auto}
-    .title-left{text-align:left;margin:0 auto;max-width:760px}
-    .title-left h1{font-size:26px;font-weight:700;color:var(--accent);margin:0}
-    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
-    .title-left .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:2px}
-
-
+    header.hero{text-align:center;margin-bottom:16px}
+    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
+    .title-left{max-width:860px;margin:0 auto;text-align:left}
+    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
+    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
+    @media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
     .req{color:var(--brand)}
@@ -27,35 +25,20 @@
     textarea{min-height:100px;resize:vertical}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
-
     fieldset{border:0;margin:0;padding:0}
     fieldset legend{font-weight:600;margin-bottom:6px}
     .reason-list{display:grid;gap:8px}
     .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
     .reason-list input[type="checkbox"]{width:16px;height:16px}
-
     .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
     .consent .row{display:flex;align-items:center;gap:10px}
     .consent .row strong{font-weight:700}
     .consent .hint{font-size:12px;color:var(--muted);text-align:left}
-
     button{background:var(--brand);color:#fff;border:none;padding:12px 24px;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer}
     button:disabled{opacity:.5;cursor:not-allowed}
     .success{color:#065f46}
     .error{color:#7f1d1d}
   </style>
-
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    // INSERISCI LE TUE CHIAVI DI TEST (es. Gmail collegata ad EmailJS)
-    const EMAILJS_PUBLIC_KEY = "SOSTITUISCI_PUBLIC_KEY";
-    const EMAILJS_SERVICE_ID = "SOSTITUISCI_SERVICE_ID";
-    const EMAILJS_TEMPLATE_ID = "SOSTITUISCI_TEMPLATE_ID";
-    document.addEventListener("DOMContentLoaded", () => {
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-    });
-  </script>
 </head>
 <body>
   <div class="wrap">
@@ -146,7 +129,11 @@
   </div>
 
   <script>
-    // ====== SETUP ======
+    // ====== SOLUZIONE WEBHOOK (Make/Zapier) ======
+    // 1) Crea un Webhook su Make.com (Tools -> Webhooks -> "Custom webhook")
+    // 2) Copia l'URL e incollalo qui sotto:
+    const WEBHOOK_URL = "https://hook.make.com/INCOLLA_QUI_IL_TUO_WEBHOOK";
+
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
     const consent = document.getElementById('consenso');
@@ -164,7 +151,7 @@
       "Emilia-Romagna": "emilia@santanderconsumerrenting.it"
       // ...completa
     };
-    function updateCTA(){ ctaEmail.value = route[regione.value] || "TUA_GMAIL_DI_TEST@gmail.com"; }
+    function updateCTA(){ ctaEmail.value = route[regione.value] || "info@santanderconsumerrenting.it"; }
     regione.addEventListener('change', updateCTA); updateCTA();
 
     function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
@@ -184,22 +171,6 @@
       return obj;
     }
 
-    async function sendWithEmailJS(data){
-      const params = {
-        to_email: data.cta_email,   // destinatario dinamico o Gmail di test
-        organization: data.organization,
-        contact_name: data.contact_name,
-        email: data.email,
-        tel: data.tel,
-        fleet_size: data.fleet_size,
-        region: data.region,
-        interest_reason: (data.interest_reason||[]).join(", "),
-        notes: data.notes || ""
-      };
-      const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-      return res.status === 200;
-    }
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       feedback.textContent = '';
@@ -210,20 +181,27 @@
         return;
       }
 
+      const data = serializeForm();
+
       try{
-        const ok = await sendWithEmailJS(serializeForm());
-        if (ok){
-          feedback.textContent = 'Grazie! La richiesta è stata inviata automaticamente (EmailJS).';
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok){
+          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
           feedback.className = 'success';
           form.reset(); toggleSubmit(); validateReasons(); updateCTA();
         } else {
-          throw new Error('EmailJS non ha risposto 200');
+          throw new Error('HTTP ' + res.status);
         }
-      } catch (err){
-        feedback.textContent = 'Invio non riuscito (EmailJS). Controlla chiavi, service e template.';
+      } catch(err){
+        feedback.textContent = 'Invio non riuscito. Verifica URL del webhook o connessione.';
         feedback.className = 'error';
       }
     });
   </script>
 </body>
 </html>
+
