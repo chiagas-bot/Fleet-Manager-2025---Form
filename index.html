@@ -11,13 +11,14 @@
     body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
 
-        /* HERO */
-    header.hero{text-align:center;margin-bottom:12px}
-    header.hero img.logo{height:90px;display:block;margin:0 auto 12px auto}
-    .title-left{text-align:left;margin:0 auto;max-width:760px}
-    .title-left h1{font-size:20px;font-weight:700;color:var(--accent);margin:0}
-    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
-    .title-left .footnote{font-size:10px;color:#8a8f98;text-align:left;margin-top:2px}
+    header.hero{text-align:center;margin-bottom:16px}
+    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
+    .title-left{max-width:860px;margin:0 auto;text-align:left}
+    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
+    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
+    @media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
 
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
@@ -47,7 +48,7 @@
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // OBBLIGATORIO: inserisci le tue credenziali EmailJS
+    // INSERISCI LE TUE CHIAVI DI TEST (es. Gmail collegata ad EmailJS)
     const EMAILJS_PUBLIC_KEY = "SOSTITUISCI_PUBLIC_KEY";
     const EMAILJS_SERVICE_ID = "SOSTITUISCI_SERVICE_ID";
     const EMAILJS_TEMPLATE_ID = "SOSTITUISCI_TEMPLATE_ID";
@@ -163,14 +164,12 @@
       "Emilia-Romagna": "emilia@santanderconsumerrenting.it"
       // ...completa
     };
-    function updateCTA(){ ctaEmail.value = route[regione.value] || "info@santanderconsumerrenting.it"; }
+    function updateCTA(){ ctaEmail.value = route[regione.value] || "TUA_GMAIL_DI_TEST@gmail.com"; }
     regione.addEventListener('change', updateCTA); updateCTA();
 
-    // Abilita bottone solo con consenso
     function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
     consent.addEventListener('change', toggleSubmit); toggleSubmit();
 
-    // Almeno una motivazione
     function validateReasons(){
       const any = Array.from(reasonBoxes).some(b => b.checked);
       reasonBoxes.forEach(b => b.required = !any);
@@ -178,7 +177,6 @@
     }
     reasonBoxes.forEach(b => b.addEventListener('change', validateReasons)); validateReasons();
 
-    // Serializza
     function serializeForm(){
       const fd = new FormData(form);
       const obj = Object.fromEntries(fd.entries());
@@ -186,10 +184,9 @@
       return obj;
     }
 
-    // Invio solo via EmailJS (niente mailto)
     async function sendWithEmailJS(data){
       const params = {
-        to_email: data.cta_email,
+        to_email: data.cta_email,   // destinatario dinamico o Gmail di test
         organization: data.organization,
         contact_name: data.contact_name,
         email: data.email,
@@ -216,23 +213,17 @@
       try{
         const ok = await sendWithEmailJS(serializeForm());
         if (ok){
-          feedback.textContent = 'Grazie! La richiesta è stata inviata automaticamente.';
+          feedback.textContent = 'Grazie! La richiesta è stata inviata automaticamente (EmailJS).';
           feedback.className = 'success';
           form.reset(); toggleSubmit(); validateReasons(); updateCTA();
         } else {
           throw new Error('EmailJS non ha risposto 200');
         }
       } catch (err){
-        feedback.textContent = 'Invio non riuscito (EmailJS). Controlla chiavi e template.';
+        feedback.textContent = 'Invio non riuscito (EmailJS). Controlla chiavi, service e template.';
         feedback.className = 'error';
       }
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
