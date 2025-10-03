@@ -112,10 +112,14 @@
 
       <div>
         <label for="note">Info Aggiuntive</label>
-        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…" style="width:100%; height:120px; resize:vertical; padding:8px;"></textarea>
+        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…" style="width:100%; height:100px; resize:horizontal; padding:8px;"></textarea>
       </div>
+        
+  <!-- Nota asterisco -->
+      <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
+      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
 
-      <div class="consent" style="display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:8px; grid-column:1/-1;width: 100%; margin-top:10px;">
+    <div class="consent" style="display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:8px; grid-column:1/-1;width: 100%; margin-top:10px;">
         <input type="checkbox" id="consenso" required aria-required="true">
         <label for="consenso">
           Dichiaro di aver letto l’Informativa Privacy
@@ -125,9 +129,7 @@
 
       <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
 
-      <!-- Nota asterisco -->
-      <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
-      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
+    
     </form>
   </div>
 
