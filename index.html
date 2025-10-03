@@ -4,49 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy - Bologna 2025</title>
-  <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
   <style>
     :root{
-      --brand:#ec0000;
-      --text:#1a1a1a;
-      --muted:#6b7280;
-      --bg:#f7f7f8;
-      --card:#ffffff;
-      --accent:#111827;
-      --radius:12px;
+      --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8;
+      --card:#ffffff; --accent:#111827; --radius:12px;
     }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: "Open Sans", Arial, sans-serif; background: var(--bg); color: var(--text); line-height:1.5; }
-    .wrap { max-width: 860px; margin: 30px auto; padding: 20px; }
-    header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
-    header img.logo { height:60px; }
-    .title-block { text-align:right; }
-    .title-block h1 { font-size: 26px; font-weight:700; color: var(--accent); margin:0; }
-    .title-block h2 { font-size: 18px; font-weight:500; color: var(--accent); margin:2px 0; }
-    .title-block .footnote { font-size:12px; color:#8a8f98; text-align:left; margin-top:4px; }
-    form { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.08); display:grid; gap:18px; }
-    label { font-weight:600; margin-bottom:6px; display:block; }
-    .req { color: var(--brand); }
-    input, select, textarea { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; font-size:15px; }
-    textarea { min-height:100px; resize:vertical; }
-    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    fieldset { border:0; margin:0; padding:0; }
-    fieldset legend { font-weight:600; margin-bottom:6px; }
-    fieldset label { display:flex; align-items:center; gap:6px; font-weight:400; }
-    .consent { padding:16px; background:#fafafa; border:1px solid #e5e5e5; border-radius:8px; font-size:14px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px; }
-    .consent input { margin-right:6px; }
-    button { background:var(--brand); color:#fff; border:none; padding:12px 24px; font-size:16px; font-weight:700; border-radius:30px; cursor:pointer; }
-    button:disabled { opacity:.5; cursor:not-allowed; }
-    .hint { font-size:12px; color:var(--muted); margin-top:4px; text-align:center; }
-    .success { color: #065f46; }
-    .error { color: #7f1d1d; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    .wrap{max-width:860px;margin:30px auto;padding:20px}
+
+    /* HERO */
+    header.hero{text-align:center;margin-bottom:12px}
+    header.hero img.logo{height:60px;display:block;margin:0 auto 12px auto}
+    .title-left{text-align:left;margin:0 auto;max-width:760px}
+    .title-left h1{font-size:26px;font-weight:700;color:var(--accent);margin:0}
+    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
+    .title-left .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:2px}
+
+    /* FORM */
+    form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
+    label{font-weight:600;margin-bottom:6px;display:block}
+    .req{color:var(--brand)}
+    input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:15px}
+    textarea{min-height:100px;resize:vertical}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+
+    /* MOTIVO */
+    fieldset{border:0;margin:0;padding:0}
+    fieldset legend{font-weight:600;margin-bottom:6px}
+    .reason-list{display:grid;gap:8px}
+    .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
+    .reason-list input[type="checkbox"]{width:16px;height:16px}
+
+    /* PRIVACY */
+    .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
+    .consent .row{display:flex;align-items:center;gap:10px}
+    .consent .row strong{font-weight:700}
+    .consent .hint{font-size:12px;color:var(--muted);text-align:left}
+
+    button{background:var(--brand);color:#fff;border:none;padding:12px 24px;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer}
+    button:disabled{opacity:.5;cursor:not-allowed}
+    .success{color:#065f46}
+    .error{color:#7f1d1d}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
+    <header class="hero">
       <img class="logo" src="logo.png" alt="Santander Renting Logo">
-      <div class="title-block">
+      <div class="title-left">
         <h1>Fleet Manager Academy</h1>
         <h2>Bologna 2025</h2>
         <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
@@ -84,9 +91,11 @@
       <div>
         <fieldset>
           <legend>Motivo di interessamento <span class="req">*</span></legend>
-          <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+          <div class="reason-list">
+            <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+          </div>
           <small>Seleziona almeno una voce.</small>
         </fieldset>
       </div>
@@ -111,12 +120,10 @@
       </div>
 
       <div class="consent">
-        <label for="consenso">
+        <div class="row">
           <input type="checkbox" id="consenso" required>
-          Dichiaro di aver letto l’Informativa Privacy
-          <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>
-          e di acconsentire al trattamento
-        </label>
+          <label for="consenso"><strong>Dichiaro di aver letto l’Informativa Privacy <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento</strong></label>
+        </div>
         <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
       </div>
 
@@ -124,50 +131,6 @@
       <p id="feedback" class="hint" role="status" aria-live="polite"></p>
     </form>
   </div>
-
-  <script>
-    const consent = document.getElementById('consenso');
-    const submitBtn = document.getElementById('submitBtn');
-    const form = document.getElementById('fieraForm');
-    const feedback = document.getElementById('feedback');
-
-    consent.addEventListener('change', () => {
-      submitBtn.disabled = !consent.checked;
-    });
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      feedback.textContent = '';
-      const data = Object.fromEntries(new FormData(form).entries());
-
-      if (!data['interest_reason[]'] || !data.region) {
-        feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
-        return;
-      }
-
-      try {
-        const res = await fetch('https://formsubmit.co/ajax/marco.bandinu@santanderconsumerrenting.it', {
-          method: 'POST',
-          headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
-          body: JSON.stringify({
-            ...data,
-            _subject: 'Lead FMA Bologna 2025',
-            _template: 'table'
-          })
-        });
-        if (res.ok) {
-          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-          feedback.className = 'success';
-          form.reset();
-          submitBtn.disabled = true;
-        } else {
-          throw new Error('HTTP ' + res.status);
-        }
-      } catch (err) {
-        feedback.textContent = 'Errore di invio. Riprovare o contattarci.';
-        feedback.className = 'error';
-      }
-    });
-  </script>
 </body>
 </html>
+
