@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Academy - Bologna 2025 </title>
+  <title>Fleet Manager Academy - Bologna 2025</title>
   <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
-
   <style>
     :root{
       --brand:#ec0000;
@@ -19,9 +18,10 @@
     * { box-sizing: border-box; margin:0; padding:0; }
     body { font-family: "Open Sans", Arial, sans-serif; background: var(--bg); color: var(--text); line-height:1.5; }
     .wrap { max-width: 860px; margin: 30px auto; padding: 20px; }
-    header { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
-    header img.logo { height:48px; }
-    h1 { font-size: 26px; font-weight:700; color: var(--accent); }
+    header { text-align:center; margin-bottom:24px; }
+    header img.logo { height:60px; margin-bottom:12px; }
+    h1 { font-size: 26px; font-weight:700; color: var(--accent); margin-bottom:4px; }
+    h2 { font-size: 18px; font-weight:500; color: var(--accent); }
     form { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.08); display:grid; gap:18px; }
     label { font-weight:600; margin-bottom:6px; display:block; }
     .req { color: var(--brand); }
@@ -41,123 +41,85 @@
 <body>
   <div class="wrap">
     <header>
-      <img class="logo" src="logo.png" alt="Santander Renting Logo"align middle >
-      <figcaption>
-      <h1>Fleet Manager Academy <h1>
-      </h2>Bologna 2025</h2>
-      </figcaption>
+      <img class="logo" src="logo.png" alt="Santander Renting Logo">
+      <h1>Fleet Manager Academy</h1>
+      <h2>Bologna 2025</h2>
+      <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
     </header>
 
-    <!--
-      Invio lead
-      - Primario via fetch su FormSubmit (HTTPS) verso l'indirizzo richiesto
-      - In assenza di JS, fallback "mailto:" (opzionale, ma sconsigliato sui browser moderni)
-    -->
-    <form id="fieraForm" method="post" autocomplete="off" novalidate action="marco.bandinu@santanderconsumerrenting.it" enctype="text/plain">
+    <form id="fieraForm" method="post" autocomplete="off" novalidate>
       <div>
         <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
-        <input id="ragione_sociale" name="organization" type="text" required
-               placeholder="Es. ABC S.p.A." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
+        <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ABC S.p.A.">
       </div>
 
       <div class="grid-2">
         <div>
           <label for="referente_nome">Referente | Nome e Cognome <span class="req">*</span></label>
-          <input id="referente_nome" name="contact_name" type="text" required
-                 placeholder="Nome e Cognome" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
+          <input id="referente_nome" name="contact_name" type="text" required placeholder="Nome e Cognome">
         </div>
         <div>
           <label for="email">E‑mail <span class="req">*</span></label>
-          <input id="email" name="email" type="email" required placeholder="nome@azienda.it"
-                 inputmode="email" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
+          <input id="email" name="email" type="email" required placeholder="nome@azienda.it">
         </div>
       </div>
 
       <div class="grid-2">
         <div>
           <label for="cell">Cellulare <span class="req">*</span></label>
-          <input id="cell" name="tel" type="tel" required placeholder="+39 …"
-                 inputmode="tel" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
+          <input id="cell" name="tel" type="tel" required placeholder="+39 …">
         </div>
         <div>
           <label for="dimensione_flotta">Dimensione Flotta <span class="req">*</span></label>
-          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1"
-                 placeholder="Numero veicoli" autocomplete="off" inputmode="numeric" required aria-required="true">
+          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
         </div>
       </div>
 
-      <div class="grid-2">
-       <fieldset id="motivo-fieldset" style="border:0; padding:0; margin:0 0 10px 0;">
-  <legend style="font-weight:600; margin-bottom:6px;">
-    Motivo di interessamento <span class="req">*</span>
-  </legend>
+      <div>
+        <fieldset id="motivo-fieldset" style="border:0; padding:0; margin:0;">
+          <legend style="font-weight:600; margin-bottom:6px;">
+            Motivo di interessamento <span class="req">*</span>
+          </legend>
+          <div style="display:grid; gap:8px;">
+            <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+            <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+          </div>
+          <small>Seleziona almeno una voce.</small>
+        </fieldset>
+      </div>
 
-  <div class="motivo-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-    <label style="display:flex; align-items:center; gap:6px;">
-      <input type="checkbox" name="interest_reason[]" value="Company Cars" required>
-      Company Cars
-    </label>
-
-    <label style="display:flex; align-items:center; gap:6px;">
-      <input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti" required>
-      Offerta Dipendenti
-    </label>
-
-    <label style="display:flex; align-items:center; gap:6px;">
-      <input type="checkbox" name="interest_reason[]" value="Altro" required>
-      Altro
-    </label>
-  </div>
-
-  <small>Seleziona almeno una voce.</small>
-</fieldset>
-
-<script>
-  // Richiesto: almeno una checkbox selezionata
-  (function () {
-    const boxes = document.querySelectorAll('input[name="interest_reason[]"]');
-    function validate() {
-      const oneChecked = Array.from(boxes).some(b => b.checked);
-      boxes.forEach(b => b.required = !oneChecked);
-    }
-    boxes.forEach(b => b.addEventListener('change', validate));
-    validate();
-  })();
-</script>
-        <div>
-          <label for="regione">Regione ( Sede)<span class="req">*</span></label>
-          <select id="regione" name="region" required aria-required="true">
-            <option value="" selected disabled>Seleziona…</option>
-            <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
-            <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
-            <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
-            <option>Marche</option><option>Molise</option><option>Piemonte</option>
-            <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
-            <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
-            <option>Valle d'Aosta</option><option>Veneto</option>
-          </select>
-       </div>
+      <div>
+        <label for="regione">Regione (Sede) <span class="req">*</span></label>
+        <select id="regione" name="region" required>
+          <option value="" disabled selected>Seleziona…</option>
+          <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
+          <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
+          <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
+          <option>Marche</option><option>Molise</option><option>Piemonte</option>
+          <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
+          <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
+          <option>Valle d'Aosta</option><option>Veneto</option>
+        </select>
+      </div>
 
       <div>
         <label for="note">Info Aggiuntive</label>
-        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…" style="width:100%; height:100px; resize:horizontal; padding:8px;"></textarea>
+        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
       </div>
-        
-  <!-- Nota asterisco -->
-      <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
-      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
 
-    <div class="consent" style="display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:8px; grid-column:1/-1;width: 100%; margin-top:10px;">
-        <input type="checkbox" id="consenso" required aria-required="true">
+      <div class="consent">
+        <input type="checkbox" id="consenso" required>
         <label for="consenso">
           Dichiaro di aver letto l’Informativa Privacy
-          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento
-          <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div
-        </label> </div>
+          <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>
+          e di acconsentire al trattamento
+          <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
+        </label>
+      </div>
 
       <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
-
-    
+      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
     </form>
   </div>
 
@@ -172,14 +134,13 @@
       submitBtn.disabled = !consent.checked;
     });
 
-    // Invio sicuro via HTTPS (FormSubmit) + fallback mailto
+    // Validazione minima extra e invio
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       feedback.textContent = '';
       const data = Object.fromEntries(new FormData(form).entries());
 
-      // Validazione minima extra per select disabilitate
-      if (!data.interest_reason || !data.region) {
+      if (!data['interest_reason[]'] || !data.region) {
         feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
         return;
       }
@@ -203,20 +164,7 @@
           throw new Error('HTTP ' + res.status);
         }
       } catch (err) {
-        // Fallback: prova apertura mailto con corpo precompilato
-        const body =
-          'Ragione Sociale: ' + (data.organization||'') + '%0D%0A' +
-          'Referente: ' + (data.contact_name||'') + '%0D%0A' +
-          'Email: ' + (data.email||'') + '%0D%0A' +
-          'Cellulare: ' + (data.tel||'') + '%0D%0A' +
-          'Dimensione flotta: ' + (data.fleet_size||'') + '%0D%0A' +
-          'Motivo: ' + (data.interest_reason||'') + '%0D%0A' +
-          'Regione: ' + (data.region||'') + '%0D%0A' +
-          'Info aggiuntive: ' + (data.notes||'');
-
-        const mailto = 'mailto:marco.bandinu@santanderconsumerrenting.it?subject=Lead%20FMA%20Bologna%202025&body=' + body;
-        window.location.href = mailto;
-        feedback.textContent = 'Se il client email non si apre, riprova o contattaci.';
+        feedback.textContent = 'Errore di invio. Riprovare o contattarci.';
         feedback.className = 'error';
       }
     });
