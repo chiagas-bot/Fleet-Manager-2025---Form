@@ -11,14 +11,13 @@
     body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
 
-    header.hero{text-align:center;margin-bottom:16px}
-    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
-    .title-left{max-width:860px;margin:0 auto;text-align:left}
-    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
-    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
-    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
-    @media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
+        /* HERO */
+    header.hero{text-align:center;margin-bottom:12px}
+    header.hero img.logo{height:90px;display:block;margin:0 auto 12px auto}
+    .title-left{text-align:left;margin:0 auto;max-width:760px}
+    .title-left h1{font-size:20px;font-weight:700;color:var(--accent);margin:0}
+    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
+    .title-left .footnote{font-size:10px;color:#8a8f98;text-align:left;margin-top:2px}
 
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
