@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Academy</title>
-  <subtitle>Bologna 2025</subtitle>
+  <title>Fleet Manager Academy - Bologna 2025 — Santander Renting</title>
   <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
+
+  <!-- Stile ispirato a www.santanderrenting.it -->
   <style>
     :root{
       --brand:#ec0000;
@@ -17,77 +18,25 @@
       --radius:12px;
     }
     * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: "Open Sans", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height:1.5;
-    }
-    .wrap {
-      max-width: 860px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-    header {
-      display:flex;
-      align-items:center;
-      gap:16px;
-      margin-bottom:24px;
-    }
-    header img.logo {
-      height:48px;
-    }
-    h1 {
-      font-size: 26px;
-      font-weight:700;
-      color: var(--accent);
-    }
-    form {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
-      display:grid;
-      gap:18px;
-    }
-    label {
-      font-weight:600;
-      margin-bottom:6px;
-      display:block;
-    }
-    input, select, textarea {
-      width:100%;
-      padding:12px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      font-size:15px;
-    }
+    body { font-family: "Open Sans", Arial, sans-serif; background: var(--bg); color: var(--text); line-height:1.5; }
+    .wrap { max-width: 860px; margin: 30px auto; padding: 20px; }
+    header { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+    header img.logo { height:48px; }
+    h1 { font-size: 26px; font-weight:700; color: var(--accent); }
+    form { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.08); display:grid; gap:18px; }
+    label { font-weight:600; margin-bottom:6px; display:block; }
+    .req { color: var(--brand); }
+    input, select, textarea { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; font-size:15px; }
     textarea { min-height:100px; resize:vertical; }
-    .grid-2 {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    .consent {
-      padding:12px;
-      background:#fafafa;
-      border:1px solid #e5e5e5;
-      border-radius:8px;
-      font-size:14px;
-    }
-    .consent input { margin-right:8px; }
-    button {
-      background:var(--brand);
-      color:#fff;
-      border:none;
-      padding:12px 24px;
-      font-size:16px;
-      font-weight:700;
-      border-radius:30px;
-      cursor:pointer;
-    }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .consent { padding:12px; background:#fafafa; border:1px solid #e5e5e5; border-radius:8px; font-size:14px; display:flex; gap:10px; align-items:flex-start; }
+    .consent input { margin-top:3px; }
+    button { background:var(--brand); color:#fff; border:none; padding:12px 24px; font-size:16px; font-weight:700; border-radius:30px; cursor:pointer; }
     button:disabled { opacity:.5; cursor:not-allowed; }
     .hint { font-size:12px; color:var(--muted); margin-top:4px; }
+    .footnote { font-size:12px; color:#8a8f98; text-align:left; }
+    .success { color: #065f46; }
+    .error { color: #7f1d1d; }
   </style>
 </head>
 <body>
@@ -97,38 +46,48 @@
       <h1>Fleet Manager Academy – Bologna 2025</h1>
     </header>
 
-    <form id="fieraForm" method="post" autocomplete="off" novalidate>
+    <!--
+      Invio lead
+      - Primario via fetch su FormSubmit (HTTPS) verso l'indirizzo richiesto
+      - In assenza di JS, fallback "mailto:" (opzionale, ma sconsigliato sui browser moderni)
+    -->
+    <form id="fieraForm" method="post" autocomplete="off" novalidate action="mailto:marco.bandinu@santanderconsumerrenting.it" enctype="text/plain">
       <div>
-        <label for="ragione_sociale">Ragione Sociale <span class="req">*obligatorio</span></label>
-        <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ACME S.p.A.">
+        <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
+        <input id="ragione_sociale" name="organization" type="text" required
+               placeholder="Es. ACME S.p.A." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
       </div>
 
       <div class="grid-2">
         <div>
           <label for="referente_nome">Referente — Nome e Cognome <span class="req">*</span></label>
-          <input id="referente_nome" name="contact_name" type="text" required placeholder="Nome e Cognome">
+          <input id="referente_nome" name="contact_name" type="text" required
+                 placeholder="Nome e Cognome" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
         </div>
         <div>
-          <label for="email">E-mail <span class="req">*</span></label>
-          <input id="email" name="email" type="email" required placeholder="nome@azienda.it">
+          <label for="email">E‑mail <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="nome@azienda.it"
+                 inputmode="email" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
         </div>
       </div>
 
       <div class="grid-2">
         <div>
           <label for="cell">Cellulare <span class="req">*</span></label>
-          <input id="cell" name="tel" type="tel" required placeholder="+39 …">
+          <input id="cell" name="tel" type="tel" required placeholder="+39 …"
+                 inputmode="tel" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-required="true">
         </div>
         <div>
-          <label for="dimensione_flotta">Dimensione flotta</label>
-          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1" placeholder="Numero veicoli">
+          <label for="dimensione_flotta">Dimensione flotta <span class="req">*</span></label>
+          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1"
+                 placeholder="Numero veicoli" autocomplete="off" inputmode="numeric" required aria-required="true">
         </div>
       </div>
 
       <div class="grid-2">
         <div>
-          <label for="motivo">Motivo di interessamento</label>
-          <select id="motivo" name="interest_reason">
+          <label for="motivo">Motivo di interessamento <span class="req">*</span></label>
+          <select id="motivo" name="interest_reason" required aria-required="true">
             <option value="" selected disabled>Seleziona…</option>
             <option>Company Cars</option>
             <option>Offerta Dipendenti</option>
@@ -136,8 +95,8 @@
           </select>
         </div>
         <div>
-          <label for="regione">Regione (Sede)</label>
-          <select id="regione" name="region">
+          <label for="regione">REGIONE (SEDE) <span class="req">*</span></label>
+          <select id="regione" name="region" required aria-required="true">
             <option value="" selected disabled>Seleziona…</option>
             <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
             <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
@@ -157,23 +116,80 @@
       </div>
 
       <div class="consent">
-      <label for="consenso">
-          Ai sensi dell’articolo 13 del GDPR, dichiaro di aver letto l’Informativa Privacy
-          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>.
+        <input type="checkbox" id="consenso" required aria-required="true">
+        <label for="consenso">
+          Dichiaro di aver letto l’Informativa Privacy
+          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento.
           <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
-        <input type="checkbox" id="consenso" required>
         </label>
       </div>
 
       <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
+
+      <!-- Nota asterisco -->
+      <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
+      <p id="feedback" class="hint" role="status" aria-live="polite"></p>
     </form>
   </div>
 
   <script>
+    // Abilita submit solo se consenso spuntato
     const consent = document.getElementById('consenso');
     const submitBtn = document.getElementById('submitBtn');
+    const form = document.getElementById('fieraForm');
+    const feedback = document.getElementById('feedback');
+
     consent.addEventListener('change', () => {
       submitBtn.disabled = !consent.checked;
+    });
+
+    // Invio sicuro via HTTPS (FormSubmit) + fallback mailto
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      feedback.textContent = '';
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      // Validazione minima extra per select disabilitate
+      if (!data.interest_reason || !data.region) {
+        feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
+        return;
+      }
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/marco.bandinu@santanderconsumerrenting.it', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+          body: JSON.stringify({
+            ...data,
+            _subject: 'Lead FMA Bologna 2025',
+            _template: 'table'
+          })
+        });
+        if (res.ok) {
+          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+          feedback.className = 'success';
+          form.reset();
+          submitBtn.disabled = true;
+        } else {
+          throw new Error('HTTP ' + res.status);
+        }
+      } catch (err) {
+        // Fallback: prova apertura mailto con corpo precompilato
+        const body =
+          'Ragione Sociale: ' + (data.organization||'') + '%0D%0A' +
+          'Referente: ' + (data.contact_name||'') + '%0D%0A' +
+          'Email: ' + (data.email||'') + '%0D%0A' +
+          'Cellulare: ' + (data.tel||'') + '%0D%0A' +
+          'Dimensione flotta: ' + (data.fleet_size||'') + '%0D%0A' +
+          'Motivo: ' + (data.interest_reason||'') + '%0D%0A' +
+          'Regione: ' + (data.region||'') + '%0D%0A' +
+          'Info aggiuntive: ' + (data.notes||'');
+
+        const mailto = 'mailto:marco.bandinu@santanderconsumerrenting.it?subject=Lead%20FMA%20Bologna%202025&body=' + body;
+        window.location.href = mailto;
+        feedback.textContent = 'Se il client email non si apre, riprova o contattaci.';
+        feedback.className = 'error';
+      }
     });
   </script>
 </body>
