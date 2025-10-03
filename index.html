@@ -3,239 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Accademy - Bologna 2025 — Santander Renting </title>
-  <meta name="description" content="Modulo contatti — Fleet Manager Accademy Bologna 2025">
-  <style>
-    :root{
-      --brand:#ec0000; /* Santander red placeholder */
-      --text:#1a1a1a;
-      --muted:#6b7280;
-      --bg:#f7f7f8;
-      --card:#ffffff;
-      --accent:#111827;
-      --radius:14px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin:0;
-      font-family: "OpenSans, sans-serif";
-      color:var(--text);
-      background:linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-    }
-    .wrap {
-      max-width: 820px;
-      margin: 24px auto 40px;
-      padding: clamp(16px, 2.5vw, 28px);
-    }
-    header {
-      display:flex; align-items:center; gap:16px; margin-bottom:20px;
-    }
-    header img.logo {
-      height:44px; width:auto; object-fit:contain;
-    }
-    .card {
-      background:var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 2px 16px rgba(0,0,0,.06);
-      padding: clamp(16px, 2.2vw, 28px);
-      border:1px solid #ececec;
-    }
-    h1 {
-      font-size: clamp(22px, 2.4vw, 28px);
-      margin:0 0 2px 0;
-      color:var(--accent);
-      line-height:1.2;
-      font-weight:700;
-    }
-    .subtitle {
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing:.2px;
-      margin-bottom: 2px;
-    }
-    .badge {
-      display:inline-flex; align-items:center; gap:8px;
-      background: #fff4f4; color: var(--brand);
-      border:1px dashed var(--brand);
-      padding: 6px 10px; border-radius: 999px;
-      font-size: 12px; font-weight:700; margin-bottom: 16px;
-    }
-    form {
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
-    @media (min-width: 680px){
-      .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
-    }
-    label {
-      display:block; font-weight:600; margin-bottom:6px;
-    }
-    .hint { font-size:12px; color:var(--muted); margin-top:6px;}
-    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
-      width:100%; padding:12px 12px;
-      border-radius:10px; border:1px solid #d9d9df; background:#fff;
-      font-size:16px; line-height:1.3;
-    }
-    textarea { min-height:110px; resize:vertical; }
-    .consent {
-      display:flex; align-items:flex-start; gap:10px; padding:12px; background:#fafafa; border:1px solid #ececec; border-radius:10px;
-    }
-    .consent input { transform: translateY(3px); }
-    .consent small { color:var(--muted); display:block; margin-top:6px;}
-    a.link { color:var(--brand); font-weight:700; text-decoration:none; border-bottom:1px solid currentColor; }
-    a.link:hover { opacity:.8; }
-    .actions { display:flex; gap:12px; align-items:center; margin-top:8px; }
-    button[type="submit"]{
-      background:var(--brand); color:white;
-      border:none; border-radius:999px; padding:12px 20px;
-      font-size:16px; font-weight:800; letter-spacing:.2px; cursor:pointer;
-      transition: transform .03s ease, opacity .2s ease;
-    }
-    button[type="submit"]:disabled{ opacity:.5; cursor:not-allowed; }
-    .footnote { text-align:center; font-size:12px; color:var(--muted); margin-top:14px; }
-    .req { color:var(--brand);}
-    .row { margin-top:6px; }
-  </style>
+  <title>Fleet Manager Academy - Bologna 2025 — Santander Renting</title>
+  <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <!-- Replace src with your actual logo path when hosting -->
-      <img class="logo" src="logo.png" alt="Santander Renting (logo)">
+  <h1>Fleet Manager Academy – Bologna 2025</h1>
+
+  <form id="fieraForm" method="post" autocomplete="off" novalidate>
+    <div class="row">
+      <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
+      <input id="ragione_sociale" name="organization" type="text" required
+             placeholder="Es. ACME S.p.A."
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </div>
+
+    <div class="grid-2">
       <div>
-       <h1>Fleet Manager Accademy <h1></h1>Bologna 2025</h1>
-       </div>
-    </header>
+        <label for="referente_nome">Referente — Nome e Cognome <span class="req">*</span></label>
+        <input id="referente_nome" name="contact_name" type="text" required
+               placeholder="Nome e Cognome"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div>
+        <label for="email">E-mail <span class="req">*</span></label>
+        <input id="email" name="email" type="email" required placeholder="nome@azienda.it"
+               inputmode="email" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+    </div>
 
-    <section class="card">
-      <!--
-        HOW TO CONNECT THE FORM
-        1) Recommended: replace ACTION_URL below with your form endpoint (e.g., Formspree, Formsubmit, or a custom server).
-        2) Temporary fallback: by default this uses "mailto:" which opens an email composer; replace "DESTINATARIO" with your fair inbox.
-      -->
-      <form id="fieraForm" method="POST" action="mailto:chiara.gas@santanderconsumerrenting.it" enctype="text/plain">
-        <div class="row">
-          <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
-          <input id="ragione_sociale" name="Ragione Sociale" type="text" required placeholder="Es. ACME S.p.A.">
-        </div>
+    <div class="grid-2">
+      <div>
+        <label for="cell">Cellulare <span class="req">*</span></label>
+        <input id="cell" name="tel" type="tel" required placeholder="+39 …"
+               inputmode="tel" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div>
+        <label for="dimensione_flotta">Dimensione flotta</label>
+        <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1"
+               placeholder="Numero veicoli"
+               autocomplete="off" inputmode="numeric">
+      </div>
+    </div>
 
-        <div class="grid-2">
-          <div>
-            <label for="referente_nome">Referente — Nome e Cognome <span class="req">*</span></label>
-            <input id="referente_nome" name="Referente Nome e Cognome" type="text" required placeholder="Referente Nome e Cognome">
-          </div>
-       <div class="grid-2"> 
-         <div> 
-        <div>
-         <div>
-            <label for="email">E-mail <span class="req">*</span></label>
-            <input id="email" name="E-mail" type="email" required placeholder="nome@azienda.it" inputmode="email" autocomplete="email">
-          </div>
-          <div>
-            <label for="cell">Cellulare <span class="req">*</span></label>
-            <input id="cell" name="Cellulare" type="tel" required placeholder="+39 ... " inputmode="tel" autocomplete="tel">
-          </div>
-        </div>
+    <div class="grid-2">
+      <div>
+        <label for="motivo">Motivo di interessamento</label>
+        <select id="motivo" name="interest_reason">
+          <option value="" selected disabled>Seleziona…</option>
+          <option>Company Cars</option>
+          <option>Offerta Dipendenti</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <div>
+        <label for="regione">REGIONE (SEDE)</label>
+        <select id="regione" name="region">
+          <option value="" selected disabled>Seleziona…</option>
+          <option>Abruzzo</option>
+          <option>Basilicata</option>
+          <option>Calabria</option>
+          <option>Campania</option>
+          <option>Emilia-Romagna</option>
+          <option>Friuli-Venezia Giulia</option>
+          <option>Lazio</option>
+          <option>Liguria</option>
+          <option>Lombardia</option>
+          <option>Marche</option>
+          <option>Molise</option>
+          <option>Piemonte</option>
+          <option>Puglia</option>
+          <option>Sardegna</option>
+          <option>Sicilia</option>
+          <option>Toscana</option>
+          <option>Trentino-Alto Adige</option>
+          <option>Umbria</option>
+          <option>Valle d'Aosta</option>
+          <option>Veneto</option>
+        </select>
+        <div class="hint">La regione di appartenenza ci è utile per calcolare il bollo auto.</div>
+      </div>
+    </div>
 
-        <div class="grid-2">
-          <div>
-            <label for="dimensione_flotta">Dimensione flotta</label>
-            <input id="dimensione_flotta" name="Dimensione flotta (n. veicoli)" type="number" min="0" step="1" placeholder="Numero veicoli">
-          </div>
-          <div>
-            <label for="motivo">Motivo di interessamento</label>
-            <select id="motivo" name="Motivo di interessamento">
-              <option value="" selected disabled>Seleziona...</option>
-              <option>Company Cars</option>
-              <option>Offerta Dipendenti</option>
-              <option>Altro</option>
-            </select>
-          </div>
-        </div>
+    <div class="row">
+      <label for="note">Info aggiuntive</label>
+      <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"
+                autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+    </div>
 
-        <div class="row">
-          <label for="regione">REGIONE (SEDE)</label>
-          <select id="regione" name="Regione (sede)">
-            <option value="" selected disabled>Seleziona...</option>
-            <option>Abruzzo</option>
-            <option>Basilicata</option>
-            <option>Calabria</option>
-            <option>Campania</option>
-            <option>Emilia-Romagna</option>
-            <option>Friuli-Venezia Giulia</option>
-            <option>Lazio</option>
-            <option>Liguria</option>
-            <option>Lombardia</option>
-            <option>Marche</option>
-            <option>Molise</option>
-            <option>Piemonte</option>
-            <option>Puglia</option>
-            <option>Sardegna</option>
-            <option>Sicilia</option>
-            <option>Toscana</option>
-            <option>Trentino-Alto Adige</option>
-            <option>Umbria</option>
-            <option>Valle d'Aosta</option>
-            <option>Veneto</option>
-          </select>
-          <div class="hint">La regione di appartenenza ci è utile per calcolare il bollo auto.</div>
-        </div>
+    <div class="consent">
+      <input type="checkbox" id="consenso" required>
+      <label for="consenso">
+        <strong>Note</strong><br>
+        Ai sensi dell’articolo 13 del Regolamento UE 2016/679 (GDPR), dichiaro di aver preso visione dell’Informativa Privacy
+        <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>.
+        <small class="hint">Il consenso è obbligatorio per inviare il modulo.</small>
+      </label>
+    </div>
 
-        <div class="row">
-          <label for="note">Info aggiuntive</label>
-          <textarea id="note" name="Info aggiuntive" placeholder="Scrivi qui eventuali informazioni utili..."></textarea>
-        </div>
-
-        <div class="consent">
-          <input type="checkbox" id="consenso" required>
-          <label for="consenso">
-            <strong>Note</strong><br>
-            Ai sensi dell’articolo 13 del Regolamento UE 2016/679 (GDPR), dichiaro di aver preso completa visione dell’Informativa Privacy di Santander Renting – disponibile
-            <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf?_gl=1*1fyyj26*_up*MQ..*_ga*MTIwMTgyMTk1Ny4xNzU5NDgwMjQ0*_ga_NZZQN57CRB*czE3NTk0ODAyNDMkbzEkZzAkdDE3NTk0ODAyNDMkajYwJGwwJGg2NzkwOTk2NDU.">QUI</a>
-            – e di acconsentire al trattamento dei miei dati personali per le finalità indicate nell’Informativa stessa.
-            In mancanza del consenso, Santander Renting non potrà ricontattarmi.
-            <small class="hint">Il consenso è obbligatorio per inviare il modulo.</small>
-          </label>
-        </div>
-
-        <div class="actions">
-          <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
-          <div class="hint"></div>
-        </div>
-
-        <div class="footnote">© Santander Renting — Bologna 2025</div>
-      </form>
-    </section>
-  </div>
+    <div class="actions">
+      <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
+    </div>
+  </form>
 
   <script>
-    // Enable submit only when consent is checked
+    // Abilita submit solo se consenso spuntato
     const consent = document.getElementById('consenso');
     const submitBtn = document.getElementById('submitBtn');
     consent.addEventListener('change', () => {
       submitBtn.disabled = !consent.checked;
     });
-
-    // Basic phone normalization (optional)
-    const cell = document.getElementById('cell');
-    cell.addEventListener('blur', () => {
-      cell.value = cell.value.trim();
-      if (!cell.value.startsWith('+') && cell.value.replace(/\D/g,'').length >= 9) {
-        cell.value = '+39 ' + cell.value.replace(/[^0-9]/g,'').replace(/^39/,'');
-      }
-    });
-
-    // If you move to a hosted endpoint, prevent mailto and POST via fetch instead:
-    // document.getElementById('fieraForm').addEventListener('submit', async (e) => {
-    //   e.preventDefault();
-    //   const ACTION_URL = "https://formspree.io/f/XXXXX"; // <— REPLACE
-    //   const form = e.target;
-    //   const data = Object.fromEntries(new FormData(form).entries());
-    //   const res = await fetch(ACTION_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
-    //   if (res.ok) { alert('Grazie! Ti ricontatteremo presto.'); form.reset(); submitBtn.disabled = true; }
-    //   else { alert('Si è verificato un errore. Riprova.'); }
-    // });
   </script>
 </body>
 </html>
