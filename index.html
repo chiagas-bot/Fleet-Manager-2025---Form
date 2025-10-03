@@ -87,19 +87,43 @@
       </div>
 
       <div class="grid-2">
-        <div>
-          <label for="motivo">Motivo Di Interessamento <span class="req">*</span></label>
-          <select id="motivo"
-            name="interest_reason[]"
-            multiple
-            size="4"
-            required
-            aria-required="true">
-            <option value= "Company Cars">"Company Cars"</option>
-            <option value= "Offerta Dipendenti">"Offerta Dipendenti" </option>
-            <option value="Altro">"Altro"</option>
-          </select>
-        </div>
+       <fieldset id="motivo-fieldset" style="border:0; padding:0; margin:0 0 10px 0;">
+  <legend style="font-weight:600; margin-bottom:6px;">
+    Motivo di interessamento <span class="req">*</span>
+  </legend>
+
+  <div class="motivo-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+    <label style="display:flex; align-items:center; gap:6px;">
+      <input type="checkbox" name="interest_reason[]" value="Company Cars" required>
+      Company Cars
+    </label>
+
+    <label style="display:flex; align-items:center; gap:6px;">
+      <input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti" required>
+      Offerta Dipendenti
+    </label>
+
+    <label style="display:flex; align-items:center; gap:6px;">
+      <input type="checkbox" name="interest_reason[]" value="Altro" required>
+      Altro
+    </label>
+  </div>
+
+  <small>Seleziona almeno una voce.</small>
+</fieldset>
+
+<script>
+  // Richiesto: almeno una checkbox selezionata
+  (function () {
+    const boxes = document.querySelectorAll('input[name="interest_reason[]"]');
+    function validate() {
+      const oneChecked = Array.from(boxes).some(b => b.checked);
+      boxes.forEach(b => b.required = !oneChecked);
+    }
+    boxes.forEach(b => b.addEventListener('change', validate));
+    validate();
+  })();
+</script>
         <div>
           <label for="regione">Regione ( Sede)<span class="req">*</span></label>
           <select id="regione" name="region" required aria-required="true">
