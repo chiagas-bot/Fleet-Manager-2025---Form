@@ -108,23 +108,20 @@
             <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
             <option>Valle d'Aosta</option><option>Veneto</option>
           </select>
-          <div class="hint">La regione di appartenenza ci è utile per calcolare il bollo auto.</div>
-        </div>
-      </div>
+       </div>
 
       <div>
         <label for="note">Info Aggiuntive</label>
         <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
       </div>
 
-      <div class="consent">
-        <input type="checkbox" id="consenso" required aria-required="true"margin-right: 6px;>
-        <label for="consenso" display: inline-flex; align-items:center>
+      <div class="consent" style="display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:8px;">
+        <input type="checkbox" id="consenso" required aria-required="true">
+        <label for="consenso">
           Dichiaro di aver letto l’Informativa Privacy
-          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento.
-          <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
-        </label>
-      </div>
+          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento
+          <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div
+        </label> </div>
 
       <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
 
