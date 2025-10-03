@@ -4,14 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy - Bologna 2025</title>
-  <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
   <style>
     :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    body{font-family:Arial, sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
-
-    /* HERO */
     header.hero{text-align:center;margin-bottom:16px}
     header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
     .title-left{max-width:860px;margin:0 auto;text-align:left}
@@ -20,8 +17,6 @@
     .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
     .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
     @media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
-
-    /* FORM */
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
     .req{color:var(--brand)}
@@ -29,18 +24,15 @@
     textarea{min-height:100px;resize:vertical}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
-
     fieldset{border:0;margin:0;padding:0}
     fieldset legend{font-weight:600;margin-bottom:6px}
     .reason-list{display:grid;gap:8px}
     .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
     .reason-list input[type="checkbox"]{width:16px;height:16px}
-
     .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
     .consent .row{display:flex;align-items:center;gap:10px}
     .consent .row strong{font-weight:700}
     .consent .hint{font-size:12px;color:var(--muted);text-align:left}
-
     button{background:var(--brand);color:#fff;border:none;padding:12px 24px;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer}
     button:disabled{opacity:.5;cursor:not-allowed}
     .success{color:#065f46}
@@ -114,7 +106,6 @@
         </select>
       </div>
 
-      <!-- Destinatario fisso -->
       <input type="hidden" id="cta_email" name="cta_email" value="chiara.gas@santanderconsumerrenting.it">
 
       <div>
@@ -136,8 +127,8 @@
   </div>
 
   <script>
-    // ====== CONFIGURA QUI IL WEBHOOK (Make/Zapier) ======
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbztGYzuJcnD8zPC0HYxX2VxEXYst2CZi4cDHYub538nR7fptKVWeE6DBMPbGm3bFN0P/exec";
+    // INCOLLA QUI l'URL del tuo Web App (deve finire con /exec)
+    const WEBHOOK_URL = "https://script.google.com/macros/s/IL_TUO_EXEC_URL/exec";
 
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -175,25 +166,27 @@
       const data = serializeForm();
 
       try{
-        const res = await fetch(WEBHOOK_URL, {
+        // Usando no-cors il browser non può leggere la risposta,
+        // ma la richiesta parte correttamente verso Apps Script.
+        await fetch(WEBHOOK_URL, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type':'application/json' },
           body: JSON.stringify(data)
         });
-        if (res.ok){
-          // Mostra messaggio inline OPPURE fai redirect alla pagina Grazie
-          // window.location.href = "grazie.html";
-          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-          feedback.className = 'success';
-          form.reset(); toggleSubmit(); validateReasons();
-        } else {
-          throw new Error('HTTP ' + res.status);
-        }
+
+        // Trattiamo come successo lato UI
+        feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+        feedback.className = 'success';
+        // window.location.href = 'grazie.html'; // <-- se vuoi il redirect
+        form.reset(); toggleSubmit(); validateReasons();
+
       } catch(err){
-        feedback.textContent = 'Invio non riuscito. Verifica URL del webhook o connessione.';
+        feedback.textContent = 'Invio non riuscito. Controlla l’URL del Web App o i permessi.';
         feedback.className = 'error';
       }
     });
   </script>
 </body>
 </html>
+
