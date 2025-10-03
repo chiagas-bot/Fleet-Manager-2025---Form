@@ -14,13 +14,18 @@
     body{font-family:"Open Sans",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
 
-        /* HERO */
-    header.hero{text-align:center;margin-bottom:12px}
-    header.hero img.logo{height:80px;display:block;margin:0 auto 12px auto}
-    .title-left{text-align:center;margin:0 auto;max-width:760px}
-    .title-left h1{font-size:30px;font-weight:700;color:var(--accent);margin:0}
-    .title-left h2{font-size:18px;font-weight:500;color:var(--accent);margin:2px 0 4px 0}
-    .title-left .footnote{font-size:10px;color:#8a8f98;text-align:left;margin-top:2px}
+    /* HERO */
+    header.hero{text-align:center;margin-bottom:16px}
+    header.hero img.logo{height:70px;display:block;margin:0 auto 10px}
+    .title-left{max-width:860px;margin:0 auto;text-align:left}
+    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+    .page-title{font-size:20px;font-weight:700;color:var(--accent);margin:0;flex:1}
+    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
+    @media (max-width:520px){
+      .title-row{flex-wrap:wrap}
+      .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal}
+    }
 
     /* FORM */
     form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
@@ -40,7 +45,7 @@
 
     /* PRIVACY */
     .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
-    .consent .row{display:flex;align-items:center;gap:4px}
+    .consent .row{display:flex;align-items:center;gap:10px}
     .consent .row strong{font-weight:700}
     .consent .hint{font-size:12px;color:var(--muted);text-align:left}
 
@@ -55,11 +60,13 @@
     <header class="hero">
       <img class="logo" src="logo.png" alt="Santander Renting Logo">
       <div class="title-left">
-        <h1>Fleet Manager Academy | Bologna 2025 </h1>
-       <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
+        <div class="title-row">
+          <h1 class="page-title">Fleet Manager Academy</h1>
+          <span class="subtitle">Bologna 2025</span>
+        </div>
+        <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
       </div>
     </header>
-
 
     <form id="fieraForm" autocomplete="off" novalidate>
       <div>
@@ -92,13 +99,12 @@
       <div>
         <fieldset id="motivo-fieldset">
           <legend>Motivo di interessamento <span class="req">*</span></legend>
-          <small>Seleziona almeno una voce.</small>
           <div class="reason-list">
             <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
             <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
             <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
           </div>
-         
+          <small>Seleziona almeno una voce.</small>
         </fieldset>
       </div>
 
@@ -135,70 +141,108 @@
   </div>
 
   <script>
-    // Riferimenti
+    // === CONFIGURAZIONE INVIO ===
+    // Se attivi FormSubmit, inserisci qui l'email VERIFICATA; altrimenti lascia stringa vuota.
+    const FORMSUBMIT_EMAIL = ""; // es. "tuoindirizzo@gmail.com"
+
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
     const consent = document.getElementById('consenso');
     const feedback = document.getElementById('feedback');
     const reasonBoxes = document.querySelectorAll('input[name="interest_reason[]"]');
 
-    // Abilita/Disabilita submit in base al consenso
+    // Abilita bottone solo con consenso
     function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
-    consent.addEventListener('change', toggleSubmit);
-    toggleSubmit();
+    consent.addEventListener('change', toggleSubmit); toggleSubmit();
 
-    // Validazione: almeno una motivazione
+    // Almeno una motivazione
     function validateReasons(){
       const any = Array.from(reasonBoxes).some(b => b.checked);
-      reasonBoxes.forEach(b => b.required = !any); // impone required solo se nessuna spuntata
+      reasonBoxes.forEach(b => b.required = !any);
       return any;
     }
-    reasonBoxes.forEach(b => b.addEventListener('change', validateReasons));
-    validateReasons();
+    reasonBoxes.forEach(b => b.addEventListener('change', validateReasons)); validateReasons();
 
-    // Invio
+    function serializeForm(){
+      const fd = new FormData(form);
+      const obj = Object.fromEntries(fd.entries());
+      obj.interest_reason = fd.getAll('interest_reason[]');
+      return obj;
+    }
+
+    function buildMailto(data){
+      const lines = [
+        'Ragione Sociale: ' + (data.organization||''),
+        'Referente: ' + (data.contact_name||''),
+        'Email: ' + (data.email||''),
+        'Cellulare: ' + (data.tel||''),
+        'Dimensione flotta: ' + (data.fleet_size||''),
+        'Motivo: ' + (data.interest_reason||[]).join(', '),
+        'Regione: ' + (data.region||''),
+        'Info aggiuntive: ' + (data.notes||'')
+      ];
+      const subject = 'Lead FMA Bologna 2025';
+      const body = encodeURIComponent(lines.join('\n'));
+      const to = FORMSUBMIT_EMAIL || 'marco.bandinu@santanderconsumerrenting.it';
+      return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }
+
+    function downloadBackup(data){
+      const txt = Object.entries(data).map(([k,v]) => k + ': ' + (Array.isArray(v)? v.join(', '): v)).join('\n');
+      const blob = new Blob([txt], {type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'lead_fma_bologna_2025.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    async function tryFormSubmit(data){
+      if(!FORMSUBMIT_EMAIL) return false;
+      try{
+        const res = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({...data, _subject:'Lead FMA Bologna 2025', _template:'table'})
+        });
+        return res.ok;
+      }catch(e){ return false; }
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       feedback.textContent = '';
+
       if (!form.checkValidity() || !validateReasons()){
         feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
         feedback.className = 'error';
         return;
       }
 
-      // Serializza includendo tutte le checkbox
-      const fd = new FormData(form);
-      const interest = fd.getAll('interest_reason[]');
-      const payload = Object.fromEntries(fd.entries());
-      if (interest.length) payload['interest_reason'] = interest;
+      const data = serializeForm();
 
-      try {
-        const res = await fetch('https://formsubmit.co/ajax/chiagas@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
-          body: JSON.stringify({
-            ...payload,
-            _subject: 'Lead FMA Bologna 2025',
-            _template: 'table'
-          })
-        });
-        if (res.ok){
-          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-          feedback.className = 'success';
-          form.reset();
-          toggleSubmit();
-          validateReasons();
-        } else {
-          throw new Error('HTTP ' + res.status);
-        }
-      } catch (err) {
-        feedback.textContent = 'Invio non riuscito. Verifica la connessione o riprova più tardi.';
-        feedback.className = 'error';
+      // 1) Prova FormSubmit se configurato e verificato
+      let ok = await tryFormSubmit(data);
+
+      if (ok){
+        feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+        feedback.className = 'success';
+        form.reset(); toggleSubmit(); validateReasons();
+        return;
       }
+
+      // 2) Fallback sicuro: MAILTO + backup .txt
+      const m = buildMailto(data);
+      downloadBackup(data);
+      window.location.href = m;
+      feedback.textContent = 'Apertura del client email per l’invio... (è stato scaricato anche un file .txt di backup)';
+      feedback.className = 'success';
     });
   </script>
 </body>
 </html>
+
 
 
 
