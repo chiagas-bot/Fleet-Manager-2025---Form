@@ -89,11 +89,15 @@
       <div class="grid-2">
         <div>
           <label for="motivo">Motivo Di Interessamento <span class="req">*</span></label>
-          <select id="motivo[]" name="interest_reason" required aria-required="true">
-            <option value="" selected disabled>Seleziona…</option>
-            <option>Company Cars</option>
-            <option>Offerta Dipendenti</option>
-            <option>Altro</option>
+          <select id="motivo"
+            name="interest_reason[]"
+            multiple
+            size="4"
+            required
+            aria-required="true">
+            <option value= "Company Cars">"Company Cars"</option>
+            <option value= "Offerta Dipendenti">"Offerta Dipendenti" </option>
+            <option value="Altro">"Altro"</option>
           </select>
         </div>
         <div>
