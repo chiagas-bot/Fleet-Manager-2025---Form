@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Academy - Bologna 2025 — Santander Renting</title>
+  <title>Fleet Manager Academy</title>
+  <subtitle>Bologna 2025</subtitle>
   <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
-
-  <!-- Stile ispirato a www.santanderrenting.it -->
   <style>
     :root{
       --brand:#ec0000;
@@ -100,7 +99,7 @@
 
     <form id="fieraForm" method="post" autocomplete="off" novalidate>
       <div>
-        <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
+        <label for="ragione_sociale">Ragione Sociale <span class="req">*obligatorio</span></label>
         <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ACME S.p.A.">
       </div>
 
@@ -158,11 +157,11 @@
       </div>
 
       <div class="consent">
-        <input type="checkbox" id="consenso" required>
-        <label for="consenso">
+      <label for="consenso">
           Ai sensi dell’articolo 13 del GDPR, dichiaro di aver letto l’Informativa Privacy
           <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>.
           <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
+        <input type="checkbox" id="consenso" required>
         </label>
       </div>
 
