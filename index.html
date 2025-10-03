@@ -5,108 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy - Bologna 2025 — Santander Renting</title>
   <meta name="description" content="Modulo contatti — Fleet Manager Academy Bologna 2025">
+
+  <!-- Stile ispirato a www.santanderrenting.it -->
+  <style>
+    :root{
+      --brand:#ec0000;
+      --text:#1a1a1a;
+      --muted:#6b7280;
+      --bg:#f7f7f8;
+      --card:#ffffff;
+      --accent:#111827;
+      --radius:12px;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.5;
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    header {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:24px;
+    }
+    header img.logo {
+      height:48px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight:700;
+      color: var(--accent);
+    }
+    form {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      display:grid;
+      gap:18px;
+    }
+    label {
+      font-weight:600;
+      margin-bottom:6px;
+      display:block;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:15px;
+    }
+    textarea { min-height:100px; resize:vertical; }
+    .grid-2 {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .consent {
+      padding:12px;
+      background:#fafafa;
+      border:1px solid #e5e5e5;
+      border-radius:8px;
+      font-size:14px;
+    }
+    .consent input { margin-right:8px; }
+    button {
+      background:var(--brand);
+      color:#fff;
+      border:none;
+      padding:12px 24px;
+      font-size:16px;
+      font-weight:700;
+      border-radius:30px;
+      cursor:pointer;
+    }
+    button:disabled { opacity:.5; cursor:not-allowed; }
+    .hint { font-size:12px; color:var(--muted); margin-top:4px; }
+  </style>
 </head>
 <body>
-  <h1>Fleet Manager Academy – Bologna 2025</h1>
+  <div class="wrap">
+    <header>
+      <img class="logo" src="logo.png" alt="Santander Renting Logo">
+      <h1>Fleet Manager Academy – Bologna 2025</h1>
+    </header>
 
-  <form id="fieraForm" method="post" autocomplete="off" novalidate>
-    <div class="row">
-      <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
-      <input id="ragione_sociale" name="organization" type="text" required
-             placeholder="Es. ACME S.p.A."
-             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-    </div>
-
-    <div class="grid-2">
+    <form id="fieraForm" method="post" autocomplete="off" novalidate>
       <div>
-        <label for="referente_nome">Referente — Nome e Cognome <span class="req">*</span></label>
-        <input id="referente_nome" name="contact_name" type="text" required
-               placeholder="Nome e Cognome"
-               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
+        <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ACME S.p.A.">
       </div>
-      <div>
-        <label for="email">E-mail <span class="req">*</span></label>
-        <input id="email" name="email" type="email" required placeholder="nome@azienda.it"
-               inputmode="email" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-      </div>
-    </div>
 
-    <div class="grid-2">
-      <div>
-        <label for="cell">Cellulare <span class="req">*</span></label>
-        <input id="cell" name="tel" type="tel" required placeholder="+39 …"
-               inputmode="tel" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <div class="grid-2">
+        <div>
+          <label for="referente_nome">Referente — Nome e Cognome <span class="req">*</span></label>
+          <input id="referente_nome" name="contact_name" type="text" required placeholder="Nome e Cognome">
+        </div>
+        <div>
+          <label for="email">E-mail <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="nome@azienda.it">
+        </div>
       </div>
-      <div>
-        <label for="dimensione_flotta">Dimensione flotta</label>
-        <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1"
-               placeholder="Numero veicoli"
-               autocomplete="off" inputmode="numeric">
+
+      <div class="grid-2">
+        <div>
+          <label for="cell">Cellulare <span class="req">*</span></label>
+          <input id="cell" name="tel" type="tel" required placeholder="+39 …">
+        </div>
+        <div>
+          <label for="dimensione_flotta">Dimensione flotta</label>
+          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1" placeholder="Numero veicoli">
+        </div>
       </div>
-    </div>
 
-    <div class="grid-2">
-      <div>
-        <label for="motivo">Motivo di interessamento</label>
-        <select id="motivo" name="interest_reason">
-          <option value="" selected disabled>Seleziona…</option>
-          <option>Company Cars</option>
-          <option>Offerta Dipendenti</option>
-          <option>Altro</option>
-        </select>
+      <div class="grid-2">
+        <div>
+          <label for="motivo">Motivo di interessamento</label>
+          <select id="motivo" name="interest_reason">
+            <option value="" selected disabled>Seleziona…</option>
+            <option>Company Cars</option>
+            <option>Offerta Dipendenti</option>
+            <option>Altro</option>
+          </select>
+        </div>
+        <div>
+          <label for="regione">REGIONE (SEDE)</label>
+          <select id="regione" name="region">
+            <option value="" selected disabled>Seleziona…</option>
+            <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
+            <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
+            <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
+            <option>Marche</option><option>Molise</option><option>Piemonte</option>
+            <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
+            <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
+            <option>Valle d'Aosta</option><option>Veneto</option>
+          </select>
+          <div class="hint">La regione di appartenenza ci è utile per calcolare il bollo auto.</div>
+        </div>
       </div>
+
       <div>
-        <label for="regione">REGIONE (SEDE)</label>
-        <select id="regione" name="region">
-          <option value="" selected disabled>Seleziona…</option>
-          <option>Abruzzo</option>
-          <option>Basilicata</option>
-          <option>Calabria</option>
-          <option>Campania</option>
-          <option>Emilia-Romagna</option>
-          <option>Friuli-Venezia Giulia</option>
-          <option>Lazio</option>
-          <option>Liguria</option>
-          <option>Lombardia</option>
-          <option>Marche</option>
-          <option>Molise</option>
-          <option>Piemonte</option>
-          <option>Puglia</option>
-          <option>Sardegna</option>
-          <option>Sicilia</option>
-          <option>Toscana</option>
-          <option>Trentino-Alto Adige</option>
-          <option>Umbria</option>
-          <option>Valle d'Aosta</option>
-          <option>Veneto</option>
-        </select>
-        <div class="hint">La regione di appartenenza ci è utile per calcolare il bollo auto.</div>
+        <label for="note">Info aggiuntive</label>
+        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
       </div>
-    </div>
 
-    <div class="row">
-      <label for="note">Info aggiuntive</label>
-      <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"
-                autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
-    </div>
+      <div class="consent">
+        <input type="checkbox" id="consenso" required>
+        <label for="consenso">
+          Ai sensi dell’articolo 13 del GDPR, dichiaro di aver letto l’Informativa Privacy
+          <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>.
+          <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
+        </label>
+      </div>
 
-    <div class="consent">
-      <input type="checkbox" id="consenso" required>
-      <label for="consenso">
-        <strong>Note</strong><br>
-        Ai sensi dell’articolo 13 del Regolamento UE 2016/679 (GDPR), dichiaro di aver preso visione dell’Informativa Privacy
-        <a class="link" target="_blank" rel="noopener" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a>.
-        <small class="hint">Il consenso è obbligatorio per inviare il modulo.</small>
-      </label>
-    </div>
-
-    <div class="actions">
       <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <script>
-    // Abilita submit solo se consenso spuntato
     const consent = document.getElementById('consenso');
     const submitBtn = document.getElementById('submitBtn');
     consent.addEventListener('change', () => {
