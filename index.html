@@ -1,100 +1,126 @@
+===
+// Code.gs — versione definitiva (legge parametri dal form, no JSON)
+// Destinatario fisso
+var RECIPIENT = "chiagas@gmail.com";
+
+function doPost(e) {
+  try {
+    var p = e && e.parameter ? e.parameter : {};
+
+    // Checkbox 'interest_reason[]' può arrivare come stringa o array
+    var reasons = [];
+    if (p["interest_reason[]"]) {
+      reasons = Array.isArray(p["interest_reason[]"]) ? p["interest_reason[]"] : [p["interest_reason[]"]];
+    }
+
+    var subject = "Lead FMA Bologna 2025 - " + (p.region || "Senza regione");
+    var html = [
+      "<h3>Nuovo lead FMA</h3>",
+      "<b>Azienda</b>: " + (p.organization || ""),
+      "<br><b>Referente</b>: " + (p.contact_name || ""),
+      "<br><b>Email</b>: " + (p.email || ""),
+      "<br><b>Telefono</b>: " + (p.tel || ""),
+      "<br><b>Flotta</b>: " + (p.fleet_size || ""),
+      "<br><b>Regione</b>: " + (p.region || ""),
+      "<br><b>Motivo</b>: " + reasons.join(", "),
+      "<br><b>Note</b>: " + (p.notes || "")
+    ].join("");
+
+    MailApp.sendEmail({to: RECIPIENT, subject: subject, htmlBody: html});
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ok:true}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err){
+    return ContentService
+      .createTextOutput(JSON.stringify({ok:false,error:String(err)}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(){ return ContentService.createTextOutput("OK"); }
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Academy - Bologna 2025</title>
+  <title>FMA Bologna 2025</title>
   <style>
     :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Arial, sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
-    header.hero{text-align:center;margin-bottom:16px}
-    header.hero img.logo{height:60px;display:block;margin:0 auto 10px}
-    .title-left{max-width:860px;margin:0 auto;text-align:left}
-    .title-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-    .page-title{font-size:26px;font-weight:700;color:var(--accent);margin:0;flex:1}
-    .subtitle{font-size:18px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
-    .footnote{font-size:12px;color:#8a8f98;text-align:left;margin-top:4px}
-    media (max-width:520px){ .title-row{flex-wrap:wrap} .subtitle{width:100%;text-align:left;margin-top:4px;white-space:normal} }
-    form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
+    header{text-align:center;margin-bottom:16px}
+    header img{height:60px;display:block;margin:0 auto 10px}
+    .row{display:flex;justify-content:space-between;align-items:baseline}
+    @media(max-width:520px){.row{flex-wrap:wrap}}
+    form{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
-    .req{color:var(--brand)}
-    input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:15px}
-    textarea{min-height:100px;resize:vertical}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
     fieldset{border:0;margin:0;padding:0}
-    fieldset legend{font-weight:600;margin-bottom:6px}
     .reason-list{display:grid;gap:8px}
     .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
-    .reason-list input[type="checkbox"]{width:16px;height:16px}
     .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
-    .consent .row{display:flex;align-items:center;gap:10px}
-    .consent .row strong{font-weight:700}
-    .consent .hint{font-size:12px;color:var(--muted);text-align:left}
-    button{background:var(--brand);color:#fff;border:none;padding:12px 24px;font-size:16px;font-weight:700;border-radius:30px;cursor:pointer}
+    button{background:var(--brand);color:#fff;border:none;padding:12px 24px;border-radius:30px;font-weight:700;cursor:pointer}
     button:disabled{opacity:.5;cursor:not-allowed}
-    .success{color:#065f46}
-    .error{color:#7f1d1d}
+    .hint{font-size:12px;color:#6b7280}
+    .success{color:#065f46}.error{color:#7f1d1d}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="hero">
-      <img class="logo" src="logo.png" alt="Santander Renting Logo">
-      <div class="title-left">
-        <div class="title-row">
-          <h1 class="page-title">Fleet Manager Academy</h1>
-          <span class="subtitle">Bologna 2025</span>
-        </div>
-        <p class="footnote">* I campi contrassegnati con asterisco sono obbligatori.</p>
+    <header>
+      <img src="logo.png" alt="Santander Renting">
+      <div class="row">
+        <h1>Fleet Manager Academy</h1>
+        <strong>Bologna 2025</strong>
       </div>
+      <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
     </header>
 
     <form id="fieraForm" autocomplete="off" novalidate>
       <div>
-        <label for="ragione_sociale">Ragione Sociale <span class="req">*</span></label>
-        <input id="ragione_sociale" name="organization" type="text" required placeholder="Es. ABC S.p.A.">
+        <label>Ragione Sociale *</label>
+        <input name="organization" required placeholder="Es. ABC S.p.A.">
       </div>
 
       <div class="grid-2">
         <div>
-          <label for="referente_nome">Referente | Nome e Cognome <span class="req">*</span></label>
-          <input id="referente_nome" name="contact_name" type="text" required placeholder="Nome e Cognome">
+          <label>Referente | Nome e Cognome *</label>
+          <input name="contact_name" required placeholder="Nome e Cognome">
         </div>
         <div>
-          <label for="email">E‑mail <span class="req">*</span></label>
-          <input id="email" name="email" type="email" required placeholder="nome@azienda.it" inputmode="email">
+          <label>E‑mail *</label>
+          <input name="email" type="email" required placeholder="nome@azienda.it">
         </div>
       </div>
 
       <div class="grid-2">
         <div>
-          <label for="cell">Cellulare <span class="req">*</span></label>
-          <input id="cell" name="tel" type="tel" required placeholder="+39 …" inputmode="tel">
+          <label>Cellulare *</label>
+          <input name="tel" required placeholder="+39 …">
         </div>
         <div>
-          <label for="dimensione_flotta">Dimensione Flotta <span class="req">*</span></label>
-          <input id="dimensione_flotta" name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli" inputmode="numeric">
+          <label>Dimensione Flotta *</label>
+          <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
         </div>
       </div>
 
-      <div>
-        <fieldset id="motivo-fieldset">
-          <legend>Motivo di interessamento <span class="req">*</span></legend>
-          <div class="reason-list">
-            <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-            <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-            <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
-          </div>
-          <small>Seleziona almeno una voce.</small>
-        </fieldset>
-      </div>
+      <fieldset>
+        <legend>Motivo di interessamento *</legend>
+        <div class="reason-list">
+          <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+          <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+          <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+        </div>
+        <small class="hint">Seleziona almeno una voce.</small>
+      </fieldset>
 
       <div>
-        <label for="regione">Regione (Sede) <span class="req">*</span></label>
-        <select id="regione" name="region" required>
+        <label>Regione (Sede) *</label>
+        <select name="region" required>
           <option value="" disabled selected>Seleziona…</option>
           <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
           <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
@@ -106,18 +132,16 @@
         </select>
       </div>
 
-      <input type="hidden" id="cta_email" name="cta_email" value="chiagas@gmail.com">
-
       <div>
-        <label for="note">Info Aggiuntive</label>
-        <textarea id="note" name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
+        <label>Info Aggiuntive</label>
+        <textarea name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
       </div>
 
       <div class="consent">
-        <div class="row">
+        <label style="display:flex;align-items:center;gap:10px;">
           <input type="checkbox" id="consenso" required>
-          <label for="consenso"><strong>Dichiaro di aver letto l’Informativa Privacy <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento</strong></label>
-        </div>
+          <strong>Dichiaro di aver letto l’Informativa Privacy <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">QUI</a> e di acconsentire al trattamento</strong>
+        </label>
         <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
       </div>
 
@@ -127,66 +151,46 @@
   </div>
 
   <script>
-    // INCOLLA QUI l'URL del tuo Web App (deve finire con /exec)
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx5bUnPOPDCsod4pAV3t17M1uRKFL2Ha5aWR0swCC2GCgO9-0prdiEErr502k1Zcnx6Mw/exec";
+    const WEBHOOK_URL = "https://script.google.com/macros/s/IL_TUO_EXEC_URL/exec"; // <-- incolla qui il tuo URL /exec (ultimo deploy)
 
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
     const consent = document.getElementById('consenso');
     const feedback = document.getElementById('feedback');
-    const reasonBoxes = document.querySelectorAll('input[name="interest_reason[]"]');
 
-    function toggleSubmit(){ submitBtn.disabled = !consent.checked; }
-    consent.addEventListener('change', toggleSubmit); toggleSubmit();
+    consent.addEventListener('change', () => submitBtn.disabled = !consent.checked);
+    submitBtn.disabled = !consent.checked;
 
-    function validateReasons(){
-      const any = Array.from(reasonBoxes).some(b => b.checked);
-      reasonBoxes.forEach(b => b.required = !any);
-      return any;
-    }
-    reasonBoxes.forEach(b => b.addEventListener('change', validateReasons)); validateReasons();
-
-    function serializeForm(){
-      const fd = new FormData(form);
-      const obj = Object.fromEntries(fd.entries());
-      obj.interest_reason = fd.getAll('interest_reason[]');
-      return obj;
-    }
+    function hasReason(){ return !!form.querySelector('input[name="interest_reason[]"]:checked'); }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       feedback.textContent = '';
 
-      if (!form.checkValidity() || !validateReasons()){
-        feedback.textContent = 'Per favore compila tutti i campi obbligatori.';
+      if (!form.checkValidity() || !hasReason()){
+        feedback.textContent = 'Per favore compila tutti i campi obbligatori e seleziona almeno un motivo.';
         feedback.className = 'error';
         return;
       }
 
-      const data = serializeForm();
-
+      const fd = new FormData(form); // nessun header personalizzato = no preflight CORS
       try{
-        // Usando no-cors il browser non può leggere la risposta,
-        // ma la richiesta parte correttamente verso Apps Script.
-        await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type':'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        // Trattiamo come successo lato UI
-        feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-        feedback.className = 'success';
-        // window.location.href = 'grazie.html'; // <-- se vuoi il redirect
-        form.reset(); toggleSubmit(); validateReasons();
-
-      } catch(err){
-        feedback.textContent = 'Invio non riuscito. Controlla l’URL del Web App o i permessi.';
+        const res = await fetch(WEBHOOK_URL, { method:'POST', body: fd });
+        if (res.ok){
+          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+          feedback.className = 'success';
+          // window.location.href = 'grazie.html'; // se vuoi redirect
+          form.reset(); submitBtn.disabled = true;
+        } else {
+          throw new Error('HTTP '+res.status);
+        }
+      }catch(err){
+        feedback.textContent = 'Invio non riuscito. Controlla URL /exec e permessi (Anyone).';
         feedback.className = 'error';
       }
     });
   </script>
 </body>
 </html>
+
 
