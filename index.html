@@ -1,274 +1,190 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fleet Manager Academy Bologna 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleet Manager Academy Bologna 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
---santander-red: #EA1D25;
---text: #1a1a1a;
---bg: #ffffff;
---card: #f9f9f9;
---muted: #6b7280;
---radius: 12px;
---shadow: 0 2px 12px rgba(0,0,0,0.08);
---border-gray: #cccccc;
+:root{
+  --santander-red:#EA1D25; --text:#1a1a1a; --bg:#fff; --card:#f9f9f9;
+  --muted:#6b7280; --radius:12px; --shadow:0 2px 12px rgba(0,0,0,.08);
+  --border-gray:#cccccc;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-font-family: 'Open Sans', sans-serif;
-background: var(--bg);
-color: var(--text);
-padding: 20px;
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);padding:20px}
+.container{max-width:640px;margin:auto}
+header{text-align:center;margin-bottom:24px}
+header img{max-width:200px;margin-bottom:10px}
+h1{font-size:24px;font-weight:700;color:var(--santander-red)}
+form{
+  background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
+  display:grid;gap:18px
 }
-.container {
-max-width: 640px;
-margin: auto;
+label{font-weight:600;margin-bottom:6px;display:block}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px
 }
-header {
-text-align: center;
-margin-bottom: 24px;
+textarea{min-height:100px;resize:vertical}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+
+/* ===== MOTIVI DI INTERESSAMENTO (tutti a sinistra, testo accanto) ===== */
+.reason-box{
+  background:#fff;border:1px solid var(--border-gray);border-radius:var(--radius);
+  padding:16px;box-shadow:var(--shadow)
 }
-header img {
-max-width: 200px;
-margin-bottom: 10px;
+.reason-box legend{font-weight:600;margin-bottom:10px;color:var(--text)}
+/* Ogni riga è una mini-griglia: [checkbox][testo] */
+.reason-box label{
+  display:grid;
+  grid-template-columns: 20px auto;
+  align-items:center;
+  gap:10px;
+  margin:8px 0;
+  font-weight:400;color:var(--text);text-align:left;
 }
-h1 {
-font-size: 24px;
-font-weight: 700;
-color: var(--santander-red);
-}
-form {
-background: var(--card);
-border-radius: var(--radius);
-padding: 24px;
-box-shadow: var(--shadow);
-display: grid;
-gap: 18px;
-}
-label {
-font-weight: 600;
-margin-bottom: 6px;
-display: block;
-}
-input, select, textarea {
-width: 100%;
-padding: 12px;
-border: 1px solid #ccc;
-border-radius: 8px;
-font-size: 15px;
-}
-textarea {
-min-height: 100px;
-resize: vertical;
-}
-.grid-2 {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-}
-@media(max-width:640px) {
-.grid-2 { grid-template-columns: 1fr; }
+.reason-box input[type="checkbox"]{
+  /* niente width 100% ereditata */
+  width:auto; height:auto; margin:0;
 }
 
-/* --- MOTIVI INTERESSAMENTO --- */
-.reason-box {
-background: #fff;
-border: 1px solid var(--border-gray);
-border-radius: var(--radius);
-padding: 16px;
-box-shadow: var(--shadow);
+/* ===== CONSENSO PRIVACY (testo vicino alla checkbox) ===== */
+.consent{
+  background:#f5f5f5;border:1px solid var(--border-gray);
+  padding:12px 16px;border-radius:12px;
+  display:grid;
+  grid-template-columns: 20px 1fr;   /* checkbox | testo */
+  align-items:start; gap:10px; line-height:1.4
 }
-.reason-box legend {
-font-weight: 600;
-margin-bottom: 10px;
-color: var(--text);
+.consent input[type="checkbox"]{margin-top:2px;width:auto;height:auto}
+.consent label{
+  margin:0; font-weight:400; font-size:14px; color:var(--text); display:block
 }
-.reason-box label {
-display: flex;
-align-items: center;
-justify-content: flex-start;
-gap: 10px;
-margin-bottom: 8px;
-font-weight: 400;
-color: var(--text);
-text-align: left;
-}
+.consent a{color:var(--santander-red);text-decoration:none}
+.consent a:hover{text-decoration:underline}
 
-/* --- PRIVACY CONSENT --- */
-.consent {
-display: flex;
-align-items: flex-start;
-gap: 10px;
-background: #f5f5f5;
-border: 1px solid var(--border-gray);
-padding: 12px 16px;
-border-radius: 12px;
-line-height: 1.4;
+button{
+  background:var(--santander-red);color:#fff;border:none;padding:14px;border-radius:30px;
+  font-weight:700;font-size:16px;cursor:pointer;transition:background .3s ease
 }
-.consent input[type="checkbox"] {
-margin-top: 3px;
-flex-shrink: 0;
-}
-.consent label {
-color: var(--text);
-font-size: 14px;
-font-weight: 400;
-margin: 0;
-display: inline;
-}
-.consent a {
-color: var(--santander-red);
-text-decoration: none;
-}
-.consent a:hover {
-text-decoration: underline;
-}
-
-button {
-background: var(--santander-red);
-color: #fff;
-border: none;
-padding: 14px;
-border-radius: 30px;
-font-weight: 700;
-font-size: 16px;
-cursor: pointer;
-transition: background 0.3s ease;
-}
-button:hover {
-background: #c3001f;
-}
-button:disabled {
-opacity: 0.5;
-cursor: not-allowed;
-}
-.hint {
-font-size: 12px;
-color: var(--muted);
-}
-.success {
-color: #065f46;
-}
-.error {
-color: #b91c1c;
-}
+button:hover{background:#c3001f}
+button:disabled{opacity:.5;cursor:not-allowed}
+.hint{font-size:12px;color:var(--muted)}
+.success{color:#065f46}
+.error{color:#b91c1c}
 </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="logo.png" alt="Santander Logo">
-      <h1>Fleet Manager Academy Bologna 2025</h1>
-      <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
-    </header>
+<div class="container">
+<header>
+  <img src="logo.png" alt="Santander Logo">
+  <h1>Fleet Manager Academy Bologna 2025</h1>
+  <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
+</header>
 
-    <form id="fieraForm" method="POST" action="https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qA20AMnIVE4GtyZ8CfOI54bns4jaKlYM_-zargvrXUlReSI_4K/exec" autocomplete="off" novalidate>
-      <label>Ragione Sociale *</label>
-      <input name="organization" required placeholder="Es. ABC S.p.A.">
+<form id="fieraForm" method="POST" action="https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qA20AMnIVE4GtyZ8CfOI54bns4jaKlYM_-zargvrXUlReSI_4K/exec" autocomplete="off" novalidate>
+  <label>Ragione Sociale *</label>
+  <input name="organization" required placeholder="Es. ABC S.p.A.">
 
-      <div class="grid-2">
-        <div>
-          <label>Referente *</label>
-          <input name="contact_name" required placeholder="Nome e Cognome">
-        </div>
-        <div>
-          <label>Email *</label>
-          <input name="email" type="email" required placeholder="nome@azienda.it">
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Cellulare *</label>
-          <input name="tel" required placeholder="+39 …">
-        </div>
-        <div>
-          <label>Dimensione Flotta *</label>
-          <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
-        </div>
-      </div>
-
-      <fieldset class="reason-box">
-        <legend>Motivo di interessamento *</legend>
-        <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-        <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-        <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
-        <small class="hint">Seleziona almeno una voce.</small>
-      </fieldset>
-
-      <label>Regione (Sede) *</label>
-      <select name="region" required>
-        <option value="" disabled selected>Seleziona…</option>
-        <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
-        <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
-        <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
-        <option>Marche</option><option>Molise</option><option>Piemonte</option>
-        <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
-        <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
-        <option>Valle d'Aosta</option><option>Veneto</option>
-      </select>
-
-      <label>Info Aggiuntive</label>
-      <textarea name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
-
-      <div class="consent">
-        <label style="display:flex;align-items:center;gap:10px;">
-          <input type="checkbox" id="consenso" required>
-          <strong>
-            Dichiaro di aver letto l’<a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">Informativa Privacy</a> e di acconsentire al trattamento dei dati personali.
-          </strong>
-        </label>
-        <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
-      </div>
-
-      <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
-      <p id="feedback" class="hint" aria-live="polite"></p>
-    </form>
+  <div class="grid-2">
+    <div>
+      <label>Referente *</label>
+      <input name="contact_name" required placeholder="Nome e Cognome">
+    </div>
+    <div>
+      <label>Email *</label>
+      <input name="email" type="email" required placeholder="nome@azienda.it">
+    </div>
   </div>
 
-  <script>
-    const form = document.getElementById('fieraForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const consent = document.getElementById('consenso');
-    const feedback = document.getElementById('feedback');
+  <div class="grid-2">
+    <div>
+      <label>Cellulare *</label>
+      <input name="tel" required placeholder="+39 …">
+    </div>
+    <div>
+      <label>Dimensione Flotta *</label>
+      <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
+    </div>
+  </div>
 
-    consent.addEventListener('change', () => {
-      submitBtn.disabled = !consent.checked;
-    });
+  <fieldset class="reason-box">
+    <legend>Motivo di interessamento *</legend>
+    <label><input type="checkbox" name="interest_reason[]" value="Company Cars">Company Cars</label>
+    <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti">Offerta Dipendenti</label>
+    <label><input type="checkbox" name="interest_reason[]" value="Altro">Altro</label>
+    <small class="hint">Seleziona almeno una voce.</small>
+  </fieldset>
 
-    function hasReason() {
-      return !!form.querySelector('input[name="interest_reason[]"]:checked');
+  <label>Regione (Sede) *</label>
+  <select name="region" required>
+    <option value="" disabled selected>Seleziona…</option>
+    <option>Abruzzo</option><option>Basilicata</option><option>Calabria</option>
+    <option>Campania</option><option>Emilia-Romagna</option><option>Friuli-Venezia Giulia</option>
+    <option>Lazio</option><option>Liguria</option><option>Lombardia</option>
+    <option>Marche</option><option>Molise</option><option>Piemonte</option>
+    <option>Puglia</option><option>Sardegna</option><option>Sicilia</option>
+    <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
+    <option>Valle d'Aosta</option><option>Veneto</option>
+  </select>
+
+  <label>Info Aggiuntive</label>
+  <textarea name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
+
+  <div class="consent">
+    <input type="checkbox" id="consenso" required>
+    <label for="consenso">
+      Dichiaro di aver letto l’<a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdf">Informativa Privacy</a> e di acconsentire al trattamento dei dati personali.
+    </label>
+  </div>
+
+  <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
+  <p id="feedback" class="hint" aria-live="polite"></p>
+</form>
+</div>
+
+<script>
+const form = document.getElementById('fieraForm');
+const submitBtn = document.getElementById('submitBtn');
+const consent = document.getElementById('consenso');
+const feedback = document.getElementById('feedback');
+
+consent.addEventListener('change', () => {
+  submitBtn.disabled = !consent.checked;
+});
+
+function hasReason() {
+  return !!form.querySelector('input[name="interest_reason[]"]:checked');
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  feedback.textContent = '';
+
+  if (!form.checkValidity() || !hasReason()) {
+    feedback.textContent = 'Compila i campi obbligatori e seleziona almeno un motivo.';
+    feedback.className = 'error';
+    return;
+  }
+
+  const fd = new FormData(form);
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: fd });
+    if (res.ok) {
+      feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+      feedback.className = 'success';
+      form.reset();
+      submitBtn.disabled = true;
+    } else {
+      throw new Error('HTTP ' + res.status);
     }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      feedback.textContent = '';
-
-      if (!form.checkValidity() || !hasReason()) {
-        feedback.textContent = 'Compila i campi obbligatori e seleziona almeno un motivo.';
-        feedback.className = 'error';
-        return;
-      }
-
-      const fd = new FormData(form);
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: fd });
-        if (res.ok) {
-          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-          feedback.className = 'success';
-          form.reset();
-          submitBtn.disabled = true;
-        } else {
-          throw new Error('HTTP ' + res.status);
-        }
-      } catch (err) {
-        feedback.textContent = 'Invio non riuscito. Controlla URL /exec e permessi.';
-        feedback.className = 'error';
-      }
-    });
-  </script>
+  } catch (err) {
+    feedback.textContent = 'Invio non riuscito. Controlla URL /exec e permessi.';
+    feedback.className = 'error';
+  }
+});
+</script>
 </body>
 </html>
+
