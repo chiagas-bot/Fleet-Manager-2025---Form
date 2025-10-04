@@ -1,4 +1,4 @@
-// Code.gs — versione definitiva (legge parametri dal form, no JSON)
+// ===== BACKEND APPS SCRIPT DEFINITIVO =====
 // Destinatario fisso
 var RECIPIENT = "chiagas@gmail.com";
 
@@ -37,13 +37,16 @@ function doPost(e) {
   }
 }
 
-function doGet(){ return ContentService.createTextOutput("OK"); }
+function doGet(){ 
+  return ContentService.createTextOutput("OK"); 
+}
+INDEX.HTML (Frontend del modulo)
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FMA Bologna 2025</title>
+  <title>Fleet Manager Academy Bologna 2025</title>
   <style>
     :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -52,7 +55,7 @@ function doGet(){ return ContentService.createTextOutput("OK"); }
     header{text-align:center;margin-bottom:16px}
     header img{height:60px;display:block;margin:0 auto 10px}
     .row{display:flex;justify-content:space-between;align-items:baseline}
-    @media(max-width:520px){.row{flex-wrap:wrap}}
+    @media(max-width:520px){.row{flex-wrap:wrap;justify-content:center;text-align:center}}
     form{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
     input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
@@ -150,7 +153,7 @@ function doGet(){ return ContentService.createTextOutput("OK"); }
   </div>
 
   <script>
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbymNirMGo1qVPOZJQITrunIc1IKBGREDif2unDc05SDJqVluObxj9rVruqjAXbe-ZGOLQ/exec"; // <-- incolla qui il tuo URL /exec (ultimo deploy)
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbymNirMGo1qVPOZJQITrunIc1IKBGREDif2unDc05SDJqVluObxj9rVruqjAXbe-ZGOLQ/exec";
 
     const form = document.getElementById('fieraForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -172,13 +175,12 @@ function doGet(){ return ContentService.createTextOutput("OK"); }
         return;
       }
 
-      const fd = new FormData(form); // nessun header personalizzato = no preflight CORS
+      const fd = new FormData(form);
       try{
         const res = await fetch(WEBHOOK_URL, { method:'POST', body: fd });
         if (res.ok){
           feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
           feedback.className = 'success';
-          // window.location.href = 'grazie.html'; // se vuoi redirect
           form.reset(); submitBtn.disabled = true;
         } else {
           throw new Error('HTTP '+res.status);
@@ -191,3 +193,4 @@ function doGet(){ return ContentService.createTextOutput("OK"); }
   </script>
 </body>
 </html>
+
