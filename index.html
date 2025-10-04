@@ -4,72 +4,176 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy Bologna 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700p
   <style>
-    :root{--brand:#ec0000;--text:#1a1a1a;--muted:#6b7280;--bg:#f7f7f8;--card:#fff;--radius:12px}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial, sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-    .wrap{max-width:860px;margin:30px auto;padding:20px}
-    header{text-align:center;margin-bottom:16px}
-    header img{height:60px;display:block;margin:0 auto 10px}
-    .row{display:flex;justify-content:center;align-items:baseline;gap:10px;flex-wrap:wrap}
-    h1{font-size:26px;font-weight:700} strong{font-size:22px}
-    form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:16px}
-    label{font-weight:600;margin-bottom:6px;display:block}
-    input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px} @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
-    fieldset{border:0;margin:0;padding:0} legend{font-weight:600;margin-bottom:6px}
-    .reason-list{display:grid;gap:8px} .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
-    .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px}
-    button{background:var(--brand);color:#fff;border:none;padding:12px 24px;border-radius:30px;font-weight:700;cursor:pointer}
-    .hint{font-size:12px;color:var(--muted)} .success{color:#065f46}.error{color:#7f1d1d}
+    :root {
+      --brand: #ec0000;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --bg: #ffffff;
+      --card: #f7f7f8;
+      --accent: #111827;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+    .wrap {
+      max-width: 600px;
+      margin: auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    header img {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+    strong {
+      font-size: 18px;
+      color: var(--accent);
+    }
+    form {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      display: grid;
+      gap: 16px;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media(max-width:640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+    legend {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .reason-list {
+      display: grid;
+      gap: 8px;
+    }
+    .reason-list label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+    }
+    .consent {
+      padding: 12px;
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    button {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .success {
+      color: #065f46;
+    }
+    .error {
+      color: #7f1d1d;
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <img src="logo.png" alt="row"><h1>Fleet Manager Academy</h1><strong>Bologna 2025</strong></div>
-    <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
-  </header>
+  <div class="wrap">
+    <header>
+      logo.png
+      <h1>Fleet Manager Academy</h1>
+      <strong>Bologna 2025</strong>
+      <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
+    </header>
 
-  <form id="fieraForm" autocomplete="off" novalidate>
-    <div>
+    <form id="fieraForm" autocomplete="off" novalidate>
       <label>Ragione Sociale *</label>
       <input name="organization" required placeholder="Es. ABC S.p.A.">
-    </div>
 
-    <div class="grid-2">
-      <div>
-        <label>Referente | Nome e Cognome *</label>
-        <input name="contact_name" required placeholder="Nome e Cognome">
+      <div class="grid-2">
+        <div>
+          <label>Referente *</label>
+          <input name="contact_name" required placeholder="Nome e Cognome">
+        </div>
+        <div>
+          <label>Email *</label>
+          <input name="email" type="email" required placeholder="nome@azienda.it">
+        </div>
       </div>
-      <div>
-        <label>E-mail *</label>
-        <input name="email" type="email" required placeholder="nome@azienda.it">
-      </div>
-    </div>
 
-    <div class="grid-2">
-      <div>
-        <label>Cellulare *</label>
-        <input name="tel" required placeholder="+39 …">
+      <div class="grid-2">
+        <div>
+          <label>Cellulare *</label>
+          <input name="tel" required placeholder="+39 …">
+        </div>
+        <div>
+          <label>Dimensione Flotta *</label>
+          <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
+        </div>
       </div>
-      <div>
-        <label>Dimensione Flotta *</label>
-        <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
-      </div>
-    </div>
 
-    <fieldset>
-      <legend>Motivo di interessamento *</legend>
-      <div class="reason-list">
-        <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-        <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-        <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
-      </div>
-      <small class="hint">Seleziona almeno una voce.</small>
-    </fieldset>
+      <fieldset>
+        <legend>Motivo di interessamento *</legend>
+        <div class="reason-list">
+          <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+          <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+          <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+        </div>
+        <small class="hint">Seleziona almeno una voce.</small>
+      </fieldset>
 
-    <div>
       <label>Regione (Sede) *</label>
       <select name="region" required>
         <option value="" disabled selected>Seleziona…</option>
@@ -81,68 +185,65 @@
         <option>Toscana</option><option>Trentino-Alto Adige</option><option>Umbria</option>
         <option>Valle d'Aosta</option><option>Veneto</option>
       </select>
-    </div>
 
-    <div>
       <label>Info Aggiuntive</label>
       <textarea name="notes" placeholder="Scrivi qui eventuali informazioni utili…"></textarea>
-    </div>
 
-    <div class="consent">
-      <label style="display:flex;align-items:center;gap:10px;">
-        <input type="checkbox" id="consenso" required>
-        <strong>Dichiaro di aver letto l’Informativa Privacy
-          <a target="_blank" href="https://www.santnformativa-privacy-clienti-prospect.pdf e di acconsentire al trattamento</strong>
-      </label>
-      <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
-    </div>
+      <div class="consent">
+        <label style="display:flex;align-items:center;gap:10px;">
+          <input type="checkbox" id="consenso" required>
+          <strong>Dichiaro di aver letto l’Informativa Privacy
+            <a target="_blank" href="ing.it/uploads/Informativa-privacy-clienti-prospect.pdfQUI</a> e di acconsentire al trattamento</strong>
+        </label>
+        <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
+      </div>
 
-    <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
-    <p id="feedback" class="hint" aria-live="polite"></p>
-  </form>
-</div>
+      <button id="submitBtn" type="submit" disabled>Invia richiesta</button>
+      <p id="feedback" class="hint" aria-live="polite"></p>
+    </form>
+  </div>
 
-<script>
-  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qA20AMnIVE4GtyZ8CfOI54bns4jaKlYM_-zargvrXUlReSI_4K/exec";
-  const form = document.getElementById('fieraForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const consent = document.getElementById('consenso');
-  const feedback = document.getElementById('feedback');
+  <script>
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qA20AMnIVE4GtyZ8CfOI54bns4jaKlYM_-zargvrXUlReSI_4K/exec";
+    const form = document.getElementById('fieraForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const consent = document.getElementById('consenso');
+    const feedback = document.getElementById('feedback');
 
-  consent.addEventListener('change', () => {
-    submitBtn.disabled = !consent.checked;
-  });
+    consent.addEventListener('change', () => {
+      submitBtn.disabled = !consent.checked;
+    });
 
-  function hasReason() {
-    return !!form.querySelector('input[name="interest_reason[]"]:checked');
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    feedback.textContent = '';
-
-    if (!form.checkValidity() || !hasReason()) {
-      feedback.textContent = 'Compila i campi obbligatori e seleziona almeno un motivo.';
-      feedback.className = 'error';
-      return;
+    function hasReason() {
+      return !!form.querySelector('input[name="interest_reason[]"]:checked');
     }
 
-    const fd = new FormData(form);
-    try {
-      const res = await fetch(WEBHOOK_URL, { method: 'POST', body: fd });
-      if (res.ok) {
-        feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
-        feedback.className = 'success';
-        form.reset();
-        submitBtn.disabled = true;
-      } else {
-        throw new Error('HTTP ' + res.status);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      feedback.textContent = '';
+
+      if (!form.checkValidity() || !hasReason()) {
+        feedback.textContent = 'Compila i campi obbligatori e seleziona almeno un motivo.';
+        feedback.className = 'error';
+        return;
       }
-    } catch (err) {
-      feedback.textContent = 'Invio non riuscito. Controlla URL /exec e permessi (Anyone).';
-      feedback.className = 'error';
-    }
-  });
-</script>
+
+      const fd = new FormData(form);
+      try {
+        const res = await fetch(WEBHOOK_URL, { method: 'POST', body: fd });
+        if (res.ok) {
+          feedback.textContent = 'Grazie! La richiesta è stata inviata correttamente.';
+          feedback.className = 'success';
+          form.reset();
+          submitBtn.disabled = true;
+        } else {
+          throw new Error('HTTP ' + res.status);
+        }
+      } catch (err) {
+        feedback.textContent = 'Invio non riuscito. Controlla URL /exec e permessi (Anyone).';
+        feedback.className = 'error';
+      }
+    });
+  </script>
 </body>
 </html>
