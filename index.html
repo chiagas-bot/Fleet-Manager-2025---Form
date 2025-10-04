@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy Bologna 2025</title>
-  <link href="https://fonts.googleapis.com/cssn+Sans:wght@400;600;700&display=swap
+  <link href="https://fonts.googleapis.com/css2?familyght@400;600;700&display=swap
   <style>
     :root {
       --santander-red: #EA1D25;
@@ -71,30 +71,24 @@
     @media(max-width:640px) {
       .grid-2 { grid-template-columns: 1fr; }
     }
-    fieldset {
-      border: none;
-      padding: 0;
-    }
-    .reason-list {
-      display: grid;
-      gap: 12px;
-    }
-    .reason-list label {
+    .reason-box {
       background: #fff;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 12px;
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .reason-box legend {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--santander-red);
+    }
+    .reason-box label {
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: var(--shadow);
-      transition: background 0.3s ease;
-    }
-    .reason-list label:hover {
-      background: #f0f0f0;
-    }
-    .reason-list input {
-      transform: scale(1.2);
+      margin-bottom: 8px;
+      font-weight: 400;
     }
     .consent {
       background: #fff0f0;
@@ -142,11 +136,12 @@
 <body>
   <div class="container">
     <header>
-      <img src="logo.png>Fleet Manager Academy Bologna 2025</h1>
+      logo.png
+      <h1>Fleet Manager Academy Bologna 2025</h1>
       <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
     </header>
 
-    <form id="fieraForm" method="POST" action="https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qeSI_4K/exec
+    https://script.google.com/macros/s/AKfycbwZSXMinY3V9kzOa3qA20AMnIVE4GtyZ8CfOI54bns4jaKlYM_-zargvrXUlReSI_4K/exec
       <label>Ragione Sociale *</label>
       <input name="organization" required placeholder="Es. ABC S.p.A.">
 
@@ -172,13 +167,11 @@
         </div>
       </div>
 
-      <fieldset>
-        <label for="interest_reason">Motivo di interessamento *</label>
-        <div class="reason-list" id="interest_reason">
-          <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
-        </div>
+      <fieldset class="reason-box">
+        <legend>Motivo di interessamento *</legend>
+        <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
+        <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
+        <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
         <small class="hint">Seleziona almeno una voce.</small>
       </fieldset>
 
@@ -201,7 +194,7 @@
         <label style="display:flex;align-items:center;gap:10px;">
           <input type="checkbox" id="consenso" required>
           <strong>
-            Dichiaro di aver letto l’<a target="_blank" href="https://www.santanderrenting.it/uploadsnti-prospect.pdfInformativa Privacy</a> e di acconsentire al trattamento dei dati personali.
+            Dichiaro di aver letto l’https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdfInformativa Privacy</a> e di acconsentire al trattamento dei dati personali.
           </strong>
         </label>
         <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
