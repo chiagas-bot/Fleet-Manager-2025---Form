@@ -18,16 +18,12 @@ header{text-align:center;margin-bottom:24px}
 header img{max-width:200px;margin-bottom:10px}
 h1{font-size:24px;font-weight:700;color:var(--santander-red)}
 
-/* Spaziatura globale del form un po' più stretta */
+/* Form */
 form{
   background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
-  display:grid;gap:12px;             /* ↓ da 18px a 12px */
+  display:grid;gap:12px;
 }
-
-/* Etichette più vicine ai campi */
-label{font-weight:600;margin-bottom:2px;display:block}   /* ↓ da 6px a 2px */
-
-/* Campi standard (no checkbox/radio) */
+label{font-weight:600;margin-bottom:2px;display:block}
 input:not([type="checkbox"]):not([type="radio"]),
 select, textarea{
   width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px;
@@ -39,17 +35,8 @@ textarea{min-height:100px;resize:vertical}
 /* ===== MOTIVI DI INTERESSAMENTO ===== */
 .reason-box{
   background:#fff;border:1px solid var(--border-gray);border-radius:var(--radius);
-  padding:14px 16px 16px;            /* top 14 per non “toccare” il bordo */
-  box-shadow:var(--shadow);text-align:left;
+  padding:16px;box-shadow:var(--shadow);text-align:left;
 }
-/* legend che “copre” bene il bordo */
-.reason-box legend{
-  background:#fff;                    /* maschera il bordo sotto */
-  padding:0 6px;                      /* un filo di respiro ai lati */
-  margin-left:4px;                    /* allinea otticamente */
-  font-weight:600;color:var(--text);
-}
-
 .reason-list{display:flex;flex-direction:column;gap:8px}
 .reason{display:inline-flex;align-items:center;gap:10px;font-weight:400;color:var(--text)}
 .reason input[type="checkbox"]{margin:0;width:auto;height:auto}
@@ -111,15 +98,16 @@ button:disabled{opacity:.5;cursor:not-allowed}
     </div>
   </div>
 
-  <fieldset class="reason-box">
-    <legend>Motivo di interessamento *</legend>
+  <!-- label spostata FUORI dal box -->
+  <label>Motivo di interessamento *</label>
+  <div class="reason-box">
     <div class="reason-list">
       <label class="reason"><input type="checkbox" name="interest_reason[]" value="Company Cars"><span>Company Cars</span></label>
       <label class="reason"><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"><span>Offerta Dipendenti</span></label>
       <label class="reason"><input type="checkbox" name="interest_reason[]" value="Altro"><span>Altro</span></label>
     </div>
     <small class="hint">Seleziona almeno una voce.</small>
-  </fieldset>
+  </div>
 
   <label>Regione (Sede) *</label>
   <select name="region" required>
@@ -191,6 +179,7 @@ form.addEventListener('submit', async (e) => {
 </script>
 </body>
 </html>
+
 
 
 
