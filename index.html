@@ -22,45 +22,45 @@ form{
   display:grid;gap:18px
 }
 label{font-weight:600;margin-bottom:6px;display:block}
-input,select,textarea{
-  width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px
+
+/* NON allargare più le checkbox/radio */
+input:not([type="checkbox"]):not([type="radio"]),
+select, textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
 }
 textarea{min-height:100px;resize:vertical}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
 
-/* ===== MOTIVI DI INTERESSAMENTO (tutti a sinistra, testo accanto) ===== */
+/* ===== MOTIVI DI INTERESSAMENTO (tutti a sinistra) ===== */
 .reason-box{
   background:#fff;border:1px solid var(--border-gray);border-radius:var(--radius);
-  padding:16px;box-shadow:var(--shadow)
+  padding:16px;box-shadow:var(--shadow);text-align:left;
 }
 .reason-box legend{font-weight:600;margin-bottom:10px;color:var(--text)}
-/* Ogni riga è una mini-griglia: [checkbox][testo] */
-.reason-box label{
-  display:grid;
-  grid-template-columns: 20px auto;
+.reason-list{display:flex;flex-direction:column;gap:8px}
+.reason{
+  display:inline-flex;           /* checkbox + testo affiancati */
   align-items:center;
   gap:10px;
-  margin:8px 0;
-  font-weight:400;color:var(--text);text-align:left;
+  font-weight:400;
+  color:var(--text);
 }
-.reason-box input[type="checkbox"]{
-  /* niente width 100% ereditata */
-  width:auto; height:auto; margin:0;
-}
+.reason input[type="checkbox"]{margin:0;width:auto;height:auto}
+.reason span{display:inline-block}
 
 /* ===== CONSENSO PRIVACY (testo vicino alla checkbox) ===== */
 .consent{
   background:#f5f5f5;border:1px solid var(--border-gray);
   padding:12px 16px;border-radius:12px;
-  display:grid;
-  grid-template-columns: 20px 1fr;   /* checkbox | testo */
-  align-items:start; gap:10px; line-height:1.4
+  display:grid;grid-template-columns:20px 1fr;align-items:start;gap:10px;line-height:1.4
 }
 .consent input[type="checkbox"]{margin-top:2px;width:auto;height:auto}
-.consent label{
-  margin:0; font-weight:400; font-size:14px; color:var(--text); display:block
-}
+.consent label{margin:0;font-weight:400;font-size:14px;color:var(--text);display:block}
 .consent a{color:var(--santander-red);text-decoration:none}
 .consent a:hover{text-decoration:underline}
 
@@ -111,9 +111,11 @@ button:disabled{opacity:.5;cursor:not-allowed}
 
   <fieldset class="reason-box">
     <legend>Motivo di interessamento *</legend>
-    <label><input type="checkbox" name="interest_reason[]" value="Company Cars">Company Cars</label>
-    <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti">Offerta Dipendenti</label>
-    <label><input type="checkbox" name="interest_reason[]" value="Altro">Altro</label>
+    <div class="reason-list">
+      <label class="reason"><input type="checkbox" name="interest_reason[]" value="Company Cars"><span>Company Cars</span></label>
+      <label class="reason"><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"><span>Offerta Dipendenti</span></label>
+      <label class="reason"><input type="checkbox" name="interest_reason[]" value="Altro"><span>Altro</span></label>
+    </div>
     <small class="hint">Seleziona almeno una voce.</small>
   </fieldset>
 
@@ -187,4 +189,5 @@ form.addEventListener('submit', async (e) => {
 </script>
 </body>
 </html>
+
 
