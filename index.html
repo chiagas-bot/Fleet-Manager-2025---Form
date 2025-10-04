@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy Bologna 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700p
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&
   <style>
     :root {
-      --brand: #ec0000;
+      --santander-red: #EA1D25;
       --text: #1a1a1a;
-      --muted: #6b7280;
       --bg: #ffffff;
-      --card: #f7f7f8;
-      --accent: #111827;
+      --card: #f9f9f9;
+      --muted: #6b7280;
       --radius: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Open Sans', Arial, sans-serif;
+      font-family: 'Open Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
       padding: 20px;
     }
-    .wrap {
+    .container {
       max-width: 600px;
       margin: auto;
     }
@@ -32,23 +30,19 @@
       margin-bottom: 24px;
     }
     header img {
-      height: 60px;
+      max-width: 160px;
       margin-bottom: 10px;
     }
     h1 {
       font-size: 24px;
       font-weight: 700;
-      color: var(--brand);
-    }
-    strong {
-      font-size: 18px;
-      color: var(--accent);
+      color: var(--santander-red);
     }
     form {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       display: grid;
       gap: 16px;
     }
@@ -77,13 +71,8 @@
       .grid-2 { grid-template-columns: 1fr; }
     }
     fieldset {
-      border: 0;
-      margin: 0;
+      border: none;
       padding: 0;
-    }
-    legend {
-      font-weight: 600;
-      margin-bottom: 6px;
     }
     .reason-list {
       display: grid;
@@ -96,25 +85,27 @@
       font-weight: 400;
     }
     .consent {
+      background: #fff;
+      border: 1px solid #ddd;
       padding: 12px;
-      background: #fafafa;
-      border: 1px solid #e5e5e5;
       border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
     }
     button {
-      background: var(--brand);
+      background: var(--santander-red);
       color: #fff;
       border: none;
-      padding: 12px 24px;
+      padding: 14px;
       border-radius: 30px;
       font-weight: 700;
+      font-size: 16px;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #c3001f;
     }
     button:disabled {
-      opacity: .5;
+      opacity: 0.5;
       cursor: not-allowed;
     }
     .hint {
@@ -125,16 +116,14 @@
       color: #065f46;
     }
     .error {
-      color: #7f1d1d;
+      color: #b91c1c;
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <header>
-      logo.png
-      <h1>Fleet Manager Academy</h1>
-      <strong>Bologna 2025</strong>
+      <img src="logo <h1>Fleet Manager Academy Bologna 2025</h1>
       <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
     </header>
 
@@ -193,7 +182,7 @@
         <label style="display:flex;align-items:center;gap:10px;">
           <input type="checkbox" id="consenso" required>
           <strong>Dichiaro di aver letto l’Informativa Privacy
-            <a target="_blank" href="ing.it/uploads/Informativa-privacy-clienti-prospect.pdfQUI</a> e di acconsentire al trattamento</strong>
+            https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospect.pdfQUI</a> e di acconsentire al trattamento</strong>
         </label>
         <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
       </div>
