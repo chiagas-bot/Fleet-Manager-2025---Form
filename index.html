@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy Bologna 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&displayle>
+  <link hrefnts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap
+  <style>
     :root {
       --santander-red: #EA1D25;
       --text: #1a1a1a;
@@ -12,6 +13,7 @@
       --card: #f9f9f9;
       --muted: #6b7280;
       --radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -21,7 +23,7 @@
       padding: 20px;
     }
     .container {
-      max-width: 600px;
+      max-width: 640px;
       margin: auto;
     }
     header {
@@ -41,9 +43,9 @@
       background: var(--card);
       border-radius: var(--radius);
       padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
       display: grid;
-      gap: 16px;
+      gap: 18px;
     }
     label {
       font-weight: 600;
@@ -75,19 +77,34 @@
     }
     .reason-list {
       display: grid;
-      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
-    .reason-list label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 400;
-    }
-    .consent {
+    .reason-item {
       background: #fff;
       border: 1px solid #ddd;
-      padding: 12px;
       border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+    .reason-item input {
+      transform: scale(1.2);
+    }
+    .consent {
+      background: #fff0f0;
+      border: 1px solid #ea1d25;
+      padding: 16px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .consent strong {
+      color: var(--santander-red);
+      font-size: 14px;
     }
     button {
       background: var(--santander-red);
@@ -122,7 +139,7 @@
 <body>
   <div class="container">
     <header>
-      <ogo.png
+      logo.png
       <h1>Fleet Manager Academy Bologna 2025</h1>
       <p class="hint">* I campi contrassegnati con asterisco sono obbligatori.</p>
     </header>
@@ -156,9 +173,18 @@
       <fieldset>
         <legend>Motivo di interessamento *</legend>
         <div class="reason-list">
-          <label><input type="checkbox" name="interest_reason[]" value="Company Cars"> Company Cars</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti"> Offerta Dipendenti</label>
-          <label><input type="checkbox" name="interest_reason[]" value="Altro"> Altro</label>
+          <label class="reason-item">
+            <input type="checkbox" name="interest_reason[]" value="Company Cars">
+            <span>Company Cars</span>
+          </label>
+          <label class="reason-item">
+            <input type="checkbox" name="interest_reason[]" value="Offerta Dipendenti">
+            <span>Offerta Dipendenti</span>
+          </label>
+          <label class="reason-item">
+            <input type="checkbox" name="interest_reason[]" value="Altro">
+            <span>Altro</span>
+          </label>
         </div>
         <small class="hint">Seleziona almeno una voce.</small>
       </fieldset>
@@ -181,8 +207,9 @@
       <div class="consent">
         <label style="display:flex;align-items:center;gap:10px;">
           <input type="checkbox" id="consenso" required>
-          <strong>Dichiaro di aver letto l’Informativa Privacy
-            <a target="_blank" href="https://www.santanderrenting.it/uploads/Informativa-privacy-clienti-prospecttire al trattamento</strong>
+          <strong>
+            Dichiaro di aver letto l’<a target="_blank" href="https://www.santnformativa-privacy-clienti-prospect.pdfInformativa Privacy</a> e di acconsentire al trattamento dei dati personali.
+          </strong>
         </label>
         <div class="hint">Il consenso è obbligatorio per inviare il modulo.</div>
       </div>
