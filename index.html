@@ -1,46 +1,3 @@
-// ===== BACKEND APPS SCRIPT DEFINITIVO =====
-// Destinatario fisso
-var RECIPIENT = "chiagas@gmail.com";
-
-function doPost(e) {
-  try {
-    var p = e && e.parameter ? e.parameter : {};
-
-    // Checkbox 'interest_reason[]' può arrivare come stringa o array
-    var reasons = [];
-    if (p["interest_reason[]"]) {
-      reasons = Array.isArray(p["interest_reason[]"]) ? p["interest_reason[]"] : [p["interest_reason[]"]];
-    }
-
-    var subject = "Lead FMA Bologna 2025 - " + (p.region || "Senza regione");
-    var html = [
-      "<h3>Nuovo lead FMA</h3>",
-      "<b>Azienda</b>: " + (p.organization || ""),
-      "<br><b>Referente</b>: " + (p.contact_name || ""),
-      "<br><b>Email</b>: " + (p.email || ""),
-      "<br><b>Telefono</b>: " + (p.tel || ""),
-      "<br><b>Flotta</b>: " + (p.fleet_size || ""),
-      "<br><b>Regione</b>: " + (p.region || ""),
-      "<br><b>Motivo</b>: " + reasons.join(", "),
-      "<br><b>Note</b>: " + (p.notes || "")
-    ].join("");
-
-    MailApp.sendEmail({to: RECIPIENT, subject: subject, htmlBody: html});
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ok:true}))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch(err){
-    return ContentService
-      .createTextOutput(JSON.stringify({ok:false,error:String(err)}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-function doGet(){ 
-  return ContentService.createTextOutput("OK"); 
-}
-INDEX.HTML (Frontend del modulo)
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -48,33 +5,44 @@ INDEX.HTML (Frontend del modulo)
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fleet Manager Academy Bologna 2025</title>
   <style>
-    :root{ --brand:#ec0000; --text:#1a1a1a; --muted:#6b7280; --bg:#f7f7f8; --card:#ffffff; --accent:#111827; --radius:12px; }
+    :root{
+      --brand:#ec0000;
+      --text:#1a1a1a;
+      --muted:#6b7280;
+      --bg:#f7f7f8;
+      --card:#ffffff;
+      --accent:#111827;
+      --radius:12px;
+    }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial, sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    body{font-family:'Open Sans',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
     .wrap{max-width:860px;margin:30px auto;padding:20px}
     header{text-align:center;margin-bottom:16px}
     header img{height:60px;display:block;margin:0 auto 10px}
-    .row{display:flex;justify-content:space-between;align-items:baseline}
-    @media(max-width:520px){.row{flex-wrap:wrap;justify-content:center;text-align:center}}
-    form{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
+    .row{display:flex;justify-content:center;align-items:baseline;gap:10px;flex-wrap:wrap}
+    h1{font-size:26px;font-weight:700;color:var(--accent)}
+    strong{font-size:22px;color:var(--accent)}
+    form{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);display:grid;gap:18px}
     label{font-weight:600;margin-bottom:6px;display:block}
-    input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+    textarea{min-height:100px;resize:vertical}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
     fieldset{border:0;margin:0;padding:0}
+    legend{font-weight:600;margin-bottom:6px}
     .reason-list{display:grid;gap:8px}
     .reason-list label{display:flex;align-items:center;gap:8px;font-weight:400}
     .consent{padding:12px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;display:flex;flex-direction:column;gap:8px}
     button{background:var(--brand);color:#fff;border:none;padding:12px 24px;border-radius:30px;font-weight:700;cursor:pointer}
     button:disabled{opacity:.5;cursor:not-allowed}
-    .hint{font-size:12px;color:#6b7280}
+    .hint{font-size:12px;color:var(--muted)}
     .success{color:#065f46}.error{color:#7f1d1d}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <img src="logo.png" alt="Santander Renting">
+      <img src="logo.png" alt="Santander Renting Logo">
       <div class="row">
         <h1>Fleet Manager Academy</h1>
         <strong>Bologna 2025</strong>
@@ -193,4 +161,5 @@ INDEX.HTML (Frontend del modulo)
   </script>
 </body>
 </html>
+
 
