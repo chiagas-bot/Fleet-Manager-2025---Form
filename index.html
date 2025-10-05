@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -20,7 +18,6 @@ header{text-align:center;margin-bottom:24px}
 header img{max-width:300px;margin-bottom:10px}
 h1{font-size:24px;font-weight:700;color:var(--santander-red)}
 
-/* Form */
 form{
   background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
   display:grid;gap:12px;
@@ -34,7 +31,6 @@ textarea{min-height:100px;resize:vertical}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){.grid-2{grid-template-columns:1fr}}
 
-/* ===== MOTIVI DI INTERESSAMENTO ===== */
 .reason-box{
   background:#fff;border:1px solid var(--border-gray);border-radius:var(--radius);
   padding:16px;box-shadow:var(--shadow);text-align:left;
@@ -44,7 +40,6 @@ textarea{min-height:100px;resize:vertical}
 .reason input[type="checkbox"]{margin:0;width:auto;height:auto}
 .reason span{display:inline-block}
 
-/* ===== CONSENSO PRIVACY ===== */
 .consent{
   background:#f5f5f5;border:1px solid var(--border-gray);
   padding:12px 16px;border-radius:12px;
@@ -65,7 +60,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .success{color:#065f46}
 .error{color:#b91c1c}
 
-/* Positioning the asterisk note above Ragione Sociale */
 .row-note {
   display: flex;
   justify-content: flex-end;
@@ -94,16 +88,23 @@ button:disabled{opacity:.5;cursor:not-allowed}
       <input name="contact_name" required placeholder="Nome e Cognome">
     </div>
     <div>
-      <label>Email *</label>
-      <input name="email" type="email" required placeholder="nome@azienda.it">
+      <label>Job Title</label>
+      <input name="job_title" placeholder="Ruolo in azienda">
     </div>
   </div>
 
   <div class="grid-2">
     <div>
+      <label>Email *</label>
+      <input name="email" type="email" required placeholder="nome@azienda.it">
+    </div>
+    <div>
       <label>Cellulare *</label>
       <input name="tel" required placeholder="+39 …">
     </div>
+  </div>
+
+  <div class="grid-2">
     <div>
       <label>Dimensione Flotta *</label>
       <input name="fleet_size" type="number" min="0" step="1" required placeholder="Numero veicoli">
